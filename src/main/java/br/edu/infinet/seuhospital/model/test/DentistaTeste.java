@@ -1,10 +1,10 @@
-package br.edu.infinet.model.test;
+package br.edu.infinet.seuhospital.model.test;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.model.domain.Dentista;
+import br.edu.infinet.seuhospital.model.domain.Dentista;
 
 @Component 
 public class DentistaTeste implements ApplicationRunner {

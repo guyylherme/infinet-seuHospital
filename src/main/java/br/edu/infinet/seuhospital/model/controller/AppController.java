@@ -1,4 +1,4 @@
-package br.edu.infinet.model.controller;
+package br.edu.infinet.seuhospital.model.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

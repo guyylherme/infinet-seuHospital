@@ -1,10 +1,10 @@
-package br.edu.infinet.model.test;
+package br.edu.infinet.seuhospital.model.test;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.model.domain.ClinicoGeral;
+import br.edu.infinet.seuhospital.model.domain.ClinicoGeral;
 
 @Component
 public class ClinicoGeralTeste implements ApplicationRunner {
@@ -25,7 +25,7 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 		clinico.setTurno("Noturno");
  		System.out.println(clinico);
  		
- 		new SeuHospital("Inclusão do clinico geral teste!!!").relatorio(clinico);; 
+ 		SeuHospital.relatorio("Inclusão do clinico geral teste!!!", clinico);; 
 		
 	}
 	

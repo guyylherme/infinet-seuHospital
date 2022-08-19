@@ -1,6 +1,8 @@
-package br.edu.infinet.model.domain;
+package br.edu.infinet.seuhospital.model.domain;
 
-public class Hospital {
+import br.edu.infinet.seuhospital.interfaces.IPrinter;
+
+public class Hospital implements IPrinter {
 
 	private String nome;
 	private String cnpj;
@@ -17,7 +19,7 @@ public class Hospital {
 		System.out.println("#Pedido");
 		System.out.println(this);
 	}
-
+	 
 	@Override
 	public String toString() {
 		return "Hospital [nome=" + nome + ", cnpj=" + cnpj + ", descricao=" + descricao + "]";

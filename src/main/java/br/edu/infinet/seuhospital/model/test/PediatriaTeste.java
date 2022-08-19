@@ -1,10 +1,10 @@
-package br.edu.infinet.model.test;
+package br.edu.infinet.seuhospital.model.test;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.model.domain.Pediatria;
+import br.edu.infinet.seuhospital.model.domain.Pediatria;
 
 @Component
 public class PediatriaTeste implements ApplicationRunner {

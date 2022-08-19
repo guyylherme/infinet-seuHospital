@@ -1,4 +1,4 @@
-package br.edu.infinet.model.domain;
+package br.edu.infinet.seuhospital.model.domain;
 
 public class Pediatria  extends Especialidade{
 	
@@ -9,11 +9,20 @@ public class Pediatria  extends Especialidade{
 	@Override
 	public float calcularValorHora() {
 		
+		float valorHora = getValorHora();
+		
 		float adicionalNeonatal = neonatologia ? valorHora * 0.6f : valorHora * 0.3f;
 		float adicionalCardiologia = cardiologia ? valorHora * 0.9f : valorHora * 0.4f;
 		float adicionalBebe = apenasBebes ? valorHora * 0.4f : valorHora * 0.2f;
 		
-		return super.calcularValorHora() + adicionalNeonatal + adicionalCardiologia + adicionalBebe;
+		return adicionalNeonatal + adicionalCardiologia + adicionalBebe;
+	}
+	
+	@Override
+	public void impressao() {
+		System.out.println("#ClinicoGeral");
+		System.out.println(this); 
+		
 	}
 	
 	@Override
@@ -45,12 +54,5 @@ public class Pediatria  extends Especialidade{
 	public void setApenasBebes(boolean apenasBebes) {
 		this.apenasBebes = apenasBebes;
 	}
-	
-	
-	@Override
-	public void impressao() {
-		System.out.println("#ClinicoGeral");
-		System.out.println(this); 
-		
-	}
+	 
 }

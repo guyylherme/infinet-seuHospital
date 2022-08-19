@@ -1,12 +1,14 @@
-package br.edu.infinet.model.domain;
+package br.edu.infinet.seuhospital.model.domain;
 
-public class Endereco {
+import br.edu.infinet.seuhospital.interfaces.IPrinter;
+
+public class Endereco implements IPrinter {
 	
-	public int numero;
-	public String rua; 
-	public String estado;
-	public String pais;
-	public String cep;
+	private int numero;
+	private String rua; 
+	private String estado;
+	private String pais;
+	private String cep;
 	
 	public void impressao() {
 		System.out.println("#Pedido");

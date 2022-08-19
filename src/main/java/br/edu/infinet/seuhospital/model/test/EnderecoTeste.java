@@ -1,11 +1,11 @@
-package br.edu.infinet.model.test;
+package br.edu.infinet.seuhospital.model.test;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.model.domain.Endereco;
+import br.edu.infinet.seuhospital.model.domain.Endereco;
 
 @Order(2)
 @Component

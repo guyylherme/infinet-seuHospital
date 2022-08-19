@@ -1,22 +1,24 @@
-package br.edu.infinet.model.domain;
+package br.edu.infinet.seuhospital.model.domain;
 
-public abstract class Especialidade {
+import br.edu.infinet.seuhospital.interfaces.IPrinter;
+
+public abstract class Especialidade implements IPrinter {
 	
-	public String nome;
-	public int codigo;
-	public boolean status;	
-	public float valorHora; 
-	
-	public abstract void impressao();
+	private String nome;
+	private int codigo;
+	private boolean status;	
+	private float valorHora; 
 	 
+	public abstract float calcularValorHora(); 
+	
 	@Override
 	public String toString() {
 		return "Especialista=" + nome + ", codigo=" + codigo + ", valorHora=" + calcularValorHora()  + ", ativo=" + status;
 	}
 	
-	public float calcularValorHora(){
-		return valorHora;
-	}
+	//public float calcularValorHora(){
+	//	return valorHora;
+	//}
 
 	public String getNome() {
 		return nome;

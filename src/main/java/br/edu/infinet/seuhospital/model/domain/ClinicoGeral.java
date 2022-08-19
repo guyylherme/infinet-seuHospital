@@ -1,4 +1,4 @@
-package br.edu.infinet.model.domain;
+package br.edu.infinet.seuhospital.model.domain;
 
 /**
  * @author Guylherme
@@ -13,10 +13,19 @@ public class ClinicoGeral extends Especialidade{
 	@Override
 	public float calcularValorHora() {
 		
+		float valorHora = getValorHora();
+		
 		float valorDiarista = diarista ? valorHora * 0.7f : valorHora * 0.3f;
 		float adicionalNoturno = adicionalNoturno() ? valorHora *0.7f : valorHora *0.3f;
 		
 		return getValorHora() + valorDiarista + adicionalNoturno;
+	}
+	
+	@Override
+	public void impressao() {
+		System.out.println("#ClinicoGeral");
+		System.out.println(this);
+		
 	}
 	
 	@Override
@@ -54,15 +63,7 @@ public class ClinicoGeral extends Especialidade{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	@Override
-	public void impressao() {
-		System.out.println("#ClinicoGeral");
-		System.out.println(this);
-		
-	}
-	
-	
+ 	
 	
 	
 }

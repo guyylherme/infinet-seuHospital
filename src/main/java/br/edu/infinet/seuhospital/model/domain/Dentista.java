@@ -1,4 +1,4 @@
-package br.edu.infinet.model.domain;
+package br.edu.infinet.seuhospital.model.domain;
 
 public class Dentista extends Especialidade{
 	
@@ -9,11 +9,20 @@ public class Dentista extends Especialidade{
 	@Override
 	public float calcularValorHora() {
 		
+		float valorHora = getValorHora();
+		
 		float adicionalCirurgia = cirurgia ? valorHora * 0.7f : valorHora * 0.3f;
 		float adicionalCrianca = atendeCrianca ? valorHora * 0.6f : valorHora * 0.3f;
 		float adicionalNoturno = adicionalNoturno() ? valorHora *0.4f : valorHora *0.1f;
 		
-		return super.calcularValorHora() + adicionalCrianca + adicionalNoturno + adicionalCirurgia;
+		return adicionalCrianca + adicionalNoturno + adicionalCirurgia;
+	}
+	
+	@Override
+	public void impressao() {
+		System.out.println("#ClinicoGeral");
+		System.out.println(this);
+		
 	}
 	
 	
@@ -63,13 +72,6 @@ public class Dentista extends Especialidade{
 	public void setCirurgia(boolean cirurgia) {
 		this.cirurgia = cirurgia;
 	}
-	
-	
-	@Override
-	public void impressao() {
-		System.out.println("#ClinicoGeral");
-		System.out.println(this);
-		
-	}
+	 
 
 }

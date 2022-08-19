@@ -1,4 +1,4 @@
-package br.edu.infinet;
+package br.edu.infinet.seuhospital;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
