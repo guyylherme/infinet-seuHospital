@@ -25,7 +25,7 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 		clinico.setTurno("Noturno");
  		System.out.println(clinico);
  		
- 		SeuHospital.relatorio("Inclusão do clinico geral teste!!!", clinico);; 
+ 		AppImpressao.relatorio("Inclusão do clinico geral teste!!!", clinico);; 
 		
 	}
 	
