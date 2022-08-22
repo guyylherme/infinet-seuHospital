@@ -1,11 +1,10 @@
 package br.edu.infinet.seuhospital.model.domain;
 
-import java.util.Objects;
-
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
 
 public abstract class Especialidade implements IPrinter {
 	
+	private Integer id; 
 	private String nome;
 	private int codigo;
 	private boolean status;	
@@ -21,6 +20,14 @@ public abstract class Especialidade implements IPrinter {
 	//public float calcularValorHora(){
 	//	return valorHora;
 	//}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

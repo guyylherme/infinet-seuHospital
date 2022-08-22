@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -30,6 +31,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
+						<th scope="col">ID</th>
 						<th scope="col">Código</th>
 						<th scope="col">Nome</th>
 						<th scope="col">Status</th>
@@ -37,37 +39,28 @@
 						<th scope="col">Turno</th>
 						<th scope="col">Descrição</th>
 						<th scope="col">Diarista</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mateus</td>
-						<td>Ativo</td>
-						<td>28.0</td>
-						<td>Diúrno</td>
-						<td>Especialista em geral</td>
-						<td>Não</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>José</td>
-						<td>Inativo</td>
-						<td>27.0</td>
-						<td>Diúrno</td>
-						<td>Especialista em geral familiar</td>
-						<td>Sim</td> 
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Fernanda</td>
-						<td>Ativo</td>
-						<td>30.0</td>
-						<td>Noturno</td>
-						<td>Especialista em geral</td>
-						<td>Não</td>
-					</tr>
+				
+					<c:forEach var="clinicoGeral" items="${ listagem }">
+				
+						<tr>
+							<th>#${clinicoGeral.id}</th>
+							<th>${clinicoGeral.codigo}</th>
+							<td>${clinicoGeral.nome}</td>
+							<td>${clinicoGeral.status}</td>
+							<td>R$ ${clinicoGeral.valorHora}</td>
+							<td>${clinicoGeral.turno}</td>
+							<td>${clinicoGeral.descricao}</td>
+							<td>${clinicoGeral.diarista}</td>
+							<td><a href="/clinicoGeral/${clinicoGeral.id}/excluir">excluir</a></td>
+						</tr>
+					
+					</c:forEach>
+					
 				</tbody>
 			</table>
 		</div>
