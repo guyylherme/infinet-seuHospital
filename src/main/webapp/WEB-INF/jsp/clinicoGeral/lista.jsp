@@ -31,11 +31,10 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Código</th>
+						<th scope="col">ID</th> 
 						<th scope="col">Nome</th>
 						<th scope="col">Status</th>
-						<th scope="col">ValorHora</th>
+						<th scope="col">Valor Hora</th>
 						<th scope="col">Turno</th>
 						<th scope="col">Descrição</th>
 						<th scope="col">Diarista</th>
@@ -48,8 +47,7 @@
 					<c:forEach var="clinicoGeral" items="${ listagem }">
 				
 						<tr>
-							<th>#${clinicoGeral.id}</th>
-							<th>${clinicoGeral.codigo}</th>
+							<th>#${clinicoGeral.id}</th> 
 							<td>${clinicoGeral.nome}</td>
 							<td>${clinicoGeral.status}</td>
 							<td>R$ ${clinicoGeral.valorHora}</td>

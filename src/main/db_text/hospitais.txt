@@ -1,0 +1,4 @@
+Hospital Central do Rio;60.151.516/0001-69;Descrição Hospital Central do Rio;Rua Principal;01;Rio de Janeiro;Brasil;25046-111;03;Jessica;false;true;true;true;20;
+Hospital Zona Norte do Rio;61.151.516/0001-69;Descrição Hospital Zona Norte do Rio;Rua Secundária;02;Rio de Janeiro;Brasil;25046-111;03;Marcelo;false;true;true;true;20;
+Hospital Zona Sul do Rio;62.151.516/0001-69;Descrição Hospital Zona Sul do Rio;Rua Terciária;03;Rio de Janeiro;Brasil;25046-111;03;Julia;false;true;true;true;20;
+Hospital Baixada do Rio;63.151.516/0001-69;Descrição Hospital Baixada do Rio;Rua Quartenária;04;Rio de Janeiro;Brasil;25046-111;03;Fabricia;false;true;true;true;20;

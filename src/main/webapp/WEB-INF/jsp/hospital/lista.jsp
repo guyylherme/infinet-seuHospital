@@ -12,7 +12,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-</head>
+</head> 
+
 <body>
 
 
@@ -20,45 +21,52 @@
 
 
 	<div class="container mb-5">
-	
+
 		<h2 class="mt-4">Infinet - Seu Hospital</h2>
- 
-		
-		<div class="container-fluid pt-5 w-100 dentista">
-		
+
+
+		<div class="container-fluid pt-5 dentista">
+
 			<h4>Classe: Hospital</h4>
-		
-			<table class="table table-hover">
+
+			<table class="table table-hover"
+				style="overflow-x: auto">
 				<thead>
 					<tr>
+						<th scope="col">ID</th>
 						<th scope="col">Nome</th>
 						<th scope="col">CNPJ</th>
 						<th scope="col">Descrição</th>
+						<th scope="col">Endereço</th>
+						<th scope="col">Qtd Espec.</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
-				
+
 				<tbody>
-					<tr> 
-						<td>Hospital Duque de Caxias</td>
-						<td>90.551.358/0001-03</td>
-						<td>Estabelecimento de saúde destinado a prestar assistência médico-sanitária a uma população.</td> 
-					</tr>
-					<tr> 
-						<td>Hospital Rio de Janeiro</td>
-						<td>80.551.358/0001-03</td>
-						<td>Estabelecimento de saúde destinado a prestar assistência médico-sanitária a uma população.</td> 
-					</tr>
-					<tr> 
-						<td>Hospital São Paulo</td>
-						<td>70.551.358/0001-03</td>
-						<td>Estabelecimento de saúde destinado a prestar assistência médico-sanitária a uma população.</td> 
-					</tr>
+
+					<c:forEach var="hospital" items="${ listagem }">
+
+						<tr>
+							<th>#${hospital.id}</th>
+							<td>${hospital.nome}</td>
+							<td>${hospital.cnpj}</td>
+							<td>${hospital.descricao}</td>
+							<td>${hospital.endereco.rua} ${hospital.endereco.numero}
+								${hospital.endereco.estado} - ${hospital.endereco.pais}, 
+								${hospital.endereco.cep}</td>
+							<td>${hospital.especialidades.size()}</td>
+							<td><a href="/hospital/${hospital.id}/excluir">excluir</a></td>
+						</tr>
+
+					</c:forEach>
+
 				</tbody>
 			</table>
 		</div>
-		
-		 
-		
+
+
+
 	</div>
 
 
@@ -75,9 +83,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-		
-	<script> 
-		$('.nav-item.hospital').addClass('active'); 
+
+	<script>
+		$('.nav-item.hospital').addClass('active');
 	</script>
 </body>
 </html>

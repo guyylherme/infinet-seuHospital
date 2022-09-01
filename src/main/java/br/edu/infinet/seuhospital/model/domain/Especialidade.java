@@ -10,11 +10,11 @@ public abstract class Especialidade implements IPrinter {
 	private boolean status;	
 	private float valorHora; 
 	 
-	public abstract float calcularValorHora(); 
+	public abstract float calcularValorHora() throws Exception; 
 	
 	@Override
 	public String toString() {
-		return "Especialista=" + nome + ", codigo=" + codigo + ", valorHora=" + calcularValorHora()  + ", ativo=" + status;
+		return "Especialista=" + nome + ", codigo=" + codigo + ", ativo=" + status;
 	}
 	
 	//public float calcularValorHora(){

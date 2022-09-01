@@ -1,0 +1,3 @@
+01;Marcos Santos;true;true;true;22;Noturno;
+02;Felipe Ferreira;false;true;true;28;Diúrno;
+03;Santana Andrade;true;true;false;21;Noturno;

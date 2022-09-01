@@ -31,36 +31,32 @@
 			<table class="table table-hover">
 				<thead>
 					<tr> 
+						<th scope="col">ID</th>
 						<th scope="col">Rua</th>
 						<th scope="col">Numero</th>
 						<th scope="col">Estado</th>
 						<th scope="col">País</th>
 						<th scope="col">CEP</th> 
+						<th scope="col"></th> 
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr> 
-						<td>General Osório</td>
-						<td>163</td>
-						<td>Rio de Janeiro</td>
-						<td>Brasil</td>
-						<td>25046-111</td> 
-					</tr>
-					<tr>
-						<td>General Osório</td>
-						<td>164</td>
-						<td>Rio de Janeiro</td>
-						<td>Brasil</td>
-						<td>25046-112</td>  
-					</tr>
-					<tr>
-						<td>General Osório</td>
-						<td>165</td>
-						<td>Rio de Janeiro</td>
-						<td>Brasil</td>
-						<td>25046-113</td>  
-					</tr>
+					
+					<c:forEach var="endereco" items="${ listagem }">
+
+						<tr>
+							<th>#${endereco.id}</th>
+							<td>${endereco.rua}</td>
+							<td>${endereco.numero}</td>
+							<td>${endereco.estado}</td>
+							<td>${endereco.pais}</td>
+							<td>${endereco.cep}</td> 
+							<td><a href="/endereco/${endereco.id}/excluir">excluir</a></td>
+						</tr>
+
+					</c:forEach>
+
 				</tbody>
 			</table>
 		</div>

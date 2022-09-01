@@ -1,11 +1,18 @@
 package br.edu.infinet.seuhospital.model.test;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import br.edu.infinet.seuhospital.model.controller.EnderecoController;
 import br.edu.infinet.seuhospital.model.domain.Endereco;
+import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
 
 @Order(2)
 @Component
@@ -15,16 +22,45 @@ public class EnderecoTeste implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#EnderecoTeste");
-		 
- 		
- 		Endereco endereco1 = new Endereco("Primeira rua", 1, "Rio de Janeiro", "Brasil", "25046-111");
-		System.out.println(endereco1);
+		
+		
+		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
+		String arq = "enderecos.txt";
 
-//		Endereco endereco2 = new Endereco("Segunda rua", 2, "Rio de Janeiro", "Brasil", "25046-222");
-//		System.out.println(endereco2);
-//
-//		Endereco endereco3 = new Endereco("Terceira rua", 3, "Rio de Janeiro", "Brasil", "25046-333");
-//		System.out.println(endereco3);
+		try {
+
+			try {
+				FileReader fileReader = new FileReader(dir + arq);
+				BufferedReader leitura = new BufferedReader(fileReader);
+
+				String linha = leitura.readLine();
+				while (linha != null) {
+
+					String[] campos = linha.split(";");
+
+					try {
+			 			Endereco endereco1 = new Endereco(campos[0] ,Integer.valueOf(campos[1]), campos[2], campos[3], campos[4]);
+			 			EnderecoController.incluir(endereco1);
+			 			
+					} catch (RuaNaoPreenchidoException e) {
+						System.out.println("[ERROR] " + e.getMessage());
+					}
+
+					linha = leitura.readLine();
+				}
+
+				leitura.close();
+				fileReader.close();
+
+			} catch (FileNotFoundException e) {
+				System.out.println("[ERROR] O arquivo não existe!");
+			} catch (IOException e) {
+				System.out.println("[ERROR] Problemas no fechamaneto do arquivo!");
+			}
+
+		} finally {
+			System.out.println("Processo finalizado!");
+		}
 		
 	}
 	

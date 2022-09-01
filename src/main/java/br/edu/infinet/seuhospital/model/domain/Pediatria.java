@@ -1,30 +1,36 @@
 package br.edu.infinet.seuhospital.model.domain;
 
-public class Pediatria  extends Especialidade{
-	
+import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
+
+public class Pediatria extends Especialidade {
+
 	public boolean neonatologia;
 	public boolean cardiologia;
 	public boolean apenasBebes;
-	
+
 	@Override
-	public float calcularValorHora() {
-		
+	public float calcularValorHora() throws ValorHoraZeradoException {
+
 		float valorHora = getValorHora();
-		
+
+		if (valorHora < 0) {
+			throw new ValorHoraZeradoException("Valor Hora não pode ser menor que zero.");
+		} 
+
 		float adicionalNeonatal = neonatologia ? valorHora * 0.6f : valorHora * 0.3f;
 		float adicionalCardiologia = cardiologia ? valorHora * 0.9f : valorHora * 0.4f;
 		float adicionalBebe = apenasBebes ? valorHora * 0.4f : valorHora * 0.2f;
-		
+
 		return adicionalNeonatal + adicionalCardiologia + adicionalBebe;
 	}
-	
+
 	@Override
 	public void impressao() {
 		System.out.println("#ClinicoGeral");
-		System.out.println(this); 
-		
+		System.out.println(this);
+
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Pediatria [neonatologia=" + neonatologia + ", cardiologia=" + cardiologia + ", apenasBebes="
@@ -54,5 +60,5 @@ public class Pediatria  extends Especialidade{
 	public void setApenasBebes(boolean apenasBebes) {
 		this.apenasBebes = apenasBebes;
 	}
-	 
+
 }

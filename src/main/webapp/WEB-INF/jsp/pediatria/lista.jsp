@@ -26,49 +26,39 @@
 		
 		<div class="container-fluid pt-5 w-100 dentista">
 		
-			<h4>Classe: Dentista</h4>
+			<h4>Classe: Pediatra</h4>
 		
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Código</th>
+						<th scope="col">ID</th>
 						<th scope="col">Nome</th>
 						<th scope="col">Status</th>
 						<th scope="col">ValorHora</th>
 						<th scope="col">Neonatologia</th>
 						<th scope="col">Cardiologia</th>
 						<th scope="col">Apenas Bebes</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Elaine</td>
-						<td>Ativo</td>
-						<td>25.0</td>
-						<td>Sim</td>
-						<td>Sim</td>
-						<td>Não</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Guylherme</td>
-						<td>Ativo</td>
-						<td>31.0</td>
-						<td>Sim</td>
-						<td>Sim</td> 
-						<td>Não</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Luciene</td>
-						<td>Ativo</td>
-						<td>29.0</td>
-						<td>Sim</td>
-						<td>Sim</td>
-						<td>Sim</td> 
-					</tr>
+					  
+					  <c:forEach var="pediatra" items="${ listagem }">
+				
+						<tr>
+							<th>#${pediatra.id}</th> 
+							<td>${pediatra.nome}</td>
+							<td>${pediatra.status}</td>
+							<td>R$ ${pediatra.valorHora}</td>
+							<td>${pediatra.neonatologia}</td>
+							<td>${pediatra.cardiologia}</td>
+							<td>${pediatra.apenasBebes}</td>
+							<td><a href="/pediatra/${pediatra.id}/excluir">excluir</a></td>
+						</tr>
+					
+					</c:forEach>
+					  
 				</tbody>
 			</table>
 		</div>

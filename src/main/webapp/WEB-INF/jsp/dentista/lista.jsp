@@ -34,41 +34,31 @@
 						<th scope="col">Código</th>
 						<th scope="col">Nome</th>
 						<th scope="col">Status</th>
-						<th scope="col">ValorHora</th>
+						<th scope="col">Valor Hora</th>
 						<th scope="col">Turno</th>
-						<th scope="col">AtendeCriança</th>
+						<th scope="col">Atende Criança</th>
 						<th scope="col">Cirurgia</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Marcio</td>
-						<td>Ativo</td>
-						<td>25.0</td>
-						<td>Diúrno</td>
-						<td>Sim</td>
-						<td>Não</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Daniele</td>
-						<td>Inativo</td>
-						<td>28.0</td>
-						<td>Noturno</td>
-						<td>Não</td>
-						<td>Sim</td> 
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Janaina</td>
-						<td>Ativo</td>
-						<td>31.0</td>
-						<td>Noturno</td>
-						<td>Sim</td>
-						<td>Sim</td> 
-					</tr>
+					
+					<c:forEach var="dentista" items="${ listagem }">
+
+						<tr>
+							<th>#${dentista.id}</th> 
+							<td>${dentista.nome}</td>
+							<td>${dentista.status}</td>  
+							<td>${dentista.valorHora}</td>  
+							<td>${dentista.turno}</td>  
+							<td>${dentista.atendeCrianca}</td>  
+							<td>${dentista.cirurgia}</td>  
+							<td><a href="/dentista/${dentista.id}/excluir">excluir</a></td>
+						</tr>
+
+					</c:forEach>
+
 				</tbody>
 			</table>
 		</div>

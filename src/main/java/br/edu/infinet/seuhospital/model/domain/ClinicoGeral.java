@@ -1,5 +1,7 @@
 package br.edu.infinet.seuhospital.model.domain;
 
+import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
+
 /**
  * @author Guylherme
  *
@@ -11,7 +13,13 @@ public class ClinicoGeral extends Especialidade{
 	public boolean diarista;
 	
 	@Override
-	public float calcularValorHora() {
+	public float calcularValorHora() throws Exception {
+		
+		String turno = getTurno(); 
+		
+		if(!turno.equals("Noturno") && !turno.equals("Diúrno")) {
+			throw new PeriodoInvalidoException("Turno não pode ser diferente de Noturno ou Diúrno.");
+		}
 		
 		float valorHora = getValorHora();
 		
@@ -23,9 +31,9 @@ public class ClinicoGeral extends Especialidade{
 	
 	@Override
 	public void impressao() {
+		System.out.println();
 		System.out.println("#ClinicoGeral");
-		System.out.println(this);
-		
+		System.out.println(this); 	
 	}
 	
 	@Override

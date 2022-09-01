@@ -3,9 +3,12 @@ package br.edu.infinet.seuhospital.model.domain;
 import java.util.Set;
 
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
+import br.edu.infinet.seuhospital.model.exceptions.EnderecoNuloException;
+import br.edu.infinet.seuhospital.model.exceptions.EspecialidadeNulaVaziaException;
 
 public class Hospital implements IPrinter {
 
+	private Integer id;
 	private String nome;
 	private String cnpj;
 	private String descricao;
@@ -19,22 +22,30 @@ public class Hospital implements IPrinter {
 	}
 	
 	
-	public Hospital(String nome, String cnpj, String descricao) {
-		super();
+	public Hospital(String nome, String cnpj, String descricao, Endereco endereco , Set<Especialidade> especialidades) throws EnderecoNuloException, EspecialidadeNulaVaziaException {
+if(endereco == null) {
+			throw new EnderecoNuloException("Endereço do Hospital não pode ser nulo.");
+		}
+		
+		
+		if(especialidades.size() < 1 || especialidades.isEmpty()) {
+			throw new EspecialidadeNulaVaziaException("Especialidade não pode ser vazia ou nula.");
+		}
+		
+		
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.descricao = descricao;
+		this.endereco = endereco;
+		this.especialidades = especialidades;
 	}
 	 
+	
 	 
 	public Set<Especialidade> getEspecialidades() {
 		return especialidades;
-	}
-
-	public void setEspecialidades(Set<Especialidade> especialidades) {
-		this.especialidades = especialidades;
-	}
-
+	} 
+	
 	@Override
 	public String toString() {
 		return "Hospital [nome=" + nome + ", cnpj=" + cnpj + ", descricao=" + descricao + ", endereco=" + endereco
@@ -73,7 +84,16 @@ public class Hospital implements IPrinter {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	} 
 	
 
 }
