@@ -19,20 +19,20 @@
 				<li class="nav-item home"><a class="nav-link" href="/">Home</a></li>
 				
 				<c:if test="${not empty user}">				
+					<li class="nav-item cliente"><a class="nav-link" href="/cliente/lista">Cliente</a></li>	
 					<li class="nav-item hospital"><a class="nav-link" href="/hospital/lista">Hospital</a></li>				
 					<li class="nav-item endereco"><a class="nav-link" href="/endereco/lista">Endereço</a></li>				
 					<li class="nav-item especialidade"><a class="nav-link" href="/especialidade/lista">Especialidade</a></li>
 					<li class="nav-item dentista"><a class="nav-link" href="/dentista/lista">Dentista</a></li>
 					<li class="nav-item clinicoGeral"><a class="nav-link" href="/clinicoGeral/lista">Clinico Geral</a></li>
-					<li class="nav-item pediatria"><a class="nav-link" href="/pediatra/lista">Pediatria</a></li>
-					<li class="nav-item cliente"><a class="nav-link" href="/cliente/lista">Cliente</a></li>			
+					<li class="nav-item pediatria"><a class="nav-link" href="/pediatra/lista">Pediatria</a></li>							
 				</c:if>				
 			</ul>
 			
 			<ul class="navbar-nav navbar-right">
 				
 				<c:if test="${empty user}"> 
-					<li class="nav-item signup"><a class="nav-link" href="/signup"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+					<li class="nav-item signup"><a class="nav-link" href="/cliente"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
 					<li class="nav-item login"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</c:if>	
 				

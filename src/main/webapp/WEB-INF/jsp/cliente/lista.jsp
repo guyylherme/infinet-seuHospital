@@ -48,7 +48,7 @@
 							<td>${cliente.nome}</td>
 							<td>${cliente.email}</td>
 							<td>${cliente.senha}</td> 
-							<td><a href="/cliente/${clinicoGeral.id}/excluir">excluir</a></td>
+							<td><a href="/cliente/${cliente.email}/excluir">excluir</a></td>
 						</tr>
 					
 					</c:forEach>

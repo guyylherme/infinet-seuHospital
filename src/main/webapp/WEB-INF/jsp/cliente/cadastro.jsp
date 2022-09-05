@@ -17,7 +17,7 @@
 <body>
 
 
-	<%@ include file="menu.jsp"%>
+	<jsp:include page="../menu.jsp" />
 
 
 	<div class="container mb-5">

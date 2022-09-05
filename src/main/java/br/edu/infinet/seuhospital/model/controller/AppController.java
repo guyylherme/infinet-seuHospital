@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.edu.infinet.seuhospital.model.domain.Cliente;
+
 @Controller
 public class AppController {
 	
@@ -23,10 +25,11 @@ public class AppController {
 	@PostMapping(value = "/login")
 	public String login(Model model, @RequestParam String email, @RequestParam String senha) {
 		
-		if(email.equalsIgnoreCase(senha)) {
-			
-			String nome = "Admin"; 
-			model.addAttribute("user", nome);
+		Cliente cliente = ClienteController.validar(email, senha);
+		
+		if(cliente != null) {
+			 
+			model.addAttribute("user", cliente.getNome());
 			
 			return "home";
 //			return "redirect:/";
