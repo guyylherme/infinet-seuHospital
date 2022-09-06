@@ -9,8 +9,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.controller.ClienteController;
 import br.edu.infinet.seuhospital.model.domain.Cliente;
+import br.edu.infinet.seuhospital.model.service.ClienteService;
 
 @Component
 public class ClienteTeste implements ApplicationRunner {
@@ -42,7 +42,7 @@ public class ClienteTeste implements ApplicationRunner {
 						cliente.setEmail(campos[2]);
 						cliente.setSenha(campos[3]);
 						 
-						ClienteController.incluir(cliente);
+						new ClienteService().incluir(cliente);
 					} catch (Exception e) {
 						System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
 					} 
