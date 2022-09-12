@@ -21,12 +21,32 @@
 
 
 	<div class="container mb-5">
+		<h1 class="kcerl8-0 sc-1ji2fn-0 kVdZZm title mt-5">${projeto.nome}</h1>
+		<h6 class="mb-5">${projeto.descricao}</h6>
 
-		<h1 class="kcerl8-0 sc-1ji2fn-0 kVdZZm title mt-5">Sistema de
-							cadastro e gestão de hospital</h1>
-							
-		<h6>Navegue pelos itens do menu para visualizar as classes do programa.</h6>
- 
+		<c:forEach var="c" items="${projeto.classes}">
+			<h4>Classe: ${c.nome}</h4>
+			<table class="table table-hover mt-0">
+				<thead>
+					<tr>
+						<th scope="col">Atributo</th>
+						<th scope="col">Tipo</th>
+						<th scope="col">Descrição</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:forEach var="a" items="${c.atributos}">
+						<tr> 
+							<td>${a.nome}</td>
+							<td>${a.tipo}</td>
+							<td>${a.descricao}</td>
+						</tr>
+					</c:forEach> 
+				</tbody>
+
+			</table>
+		</c:forEach>
 
 	</div>
 

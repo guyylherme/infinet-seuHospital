@@ -1,0 +1,50 @@
+P;AppHospital;Navegue pelos itens do menu para visualizar as classes do programa.;
+C;Cliente;
+A;nome;String;O nome do usuário;
+A;email;String;O email do usuário;
+A;senha;String;A senha do usuário;
+C;Hospital;
+A;nome;String;O nome do hospital;
+A;cnpj;String;O cnpj do hospital;
+A;descricao;String;A descricao do hospital;
+A;endereco;endereco;O endereco do hospital;
+A;especialidade;especialidade;As especialidades do hospital; 
+C;Endereco;
+A;numero;String;O numero do endereco;
+A;rua;String;A rua do endereco;
+A;estado;String;O estado do endereco;
+A;pais;String;O pais do endereco;
+A;cep;String;O cep do endereco;
+C;Especialidade;
+A;nome;String;O nome da Especialidade;
+A;codigo;Integer;O codigo da Especialidade;
+A;status;Boolean ;O status da Especialidade;
+A;valorHora;float;A valorHora da Especialidade;
+C;ClinicoGeral;
+A;turno;String;O turno do ClinicoGeral;
+A;descricao;Integer;O codigo do ClinicoGeral;
+A;diarista;Boolean ;O status do ClinicoGeral;
+C;Dentista;
+A;turno;String;O turno do dentista;
+A;atendeCrianca;Boolean;O atendeCrianca do dentista;
+A;cirurgia;Boolean ;O status do dentista; 
+C;Pediatra;
+A;neonatologia;Boolean;O neonatologia do pediatra;
+A;cardiologia;Boolean;O cardiologia do pediatra;
+A;apenasBebes;Boolean ;O apenasBebes do pediatra;
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
