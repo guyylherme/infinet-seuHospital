@@ -5,17 +5,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.controller.ClinicoGeralController;
 import br.edu.infinet.seuhospital.model.domain.ClinicoGeral;
 import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
+import br.edu.infinet.seuhospital.model.service.ClinicoGeralService;
 
 @Component
 public class ClinicoGeralTeste implements ApplicationRunner {
 	
+	@Autowired
+	ClinicoGeralService clinicoGeralService;	
+	 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
@@ -38,7 +42,7 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 						String[] campos = linha.split(";");
 						
 						ClinicoGeral clinico = new ClinicoGeral();
-						clinico.setCodigo(Integer.valueOf(campos[0]));
+						clinico.setCodigo(campos[0]);
 						clinico.setNome(campos[1]);
 						clinico.setStatus(Boolean.valueOf(campos[2]));
 						
@@ -49,7 +53,7 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 						clinico.setValorHora(Float.valueOf(campos[5]));
 						clinico.calcularValorHora();
 						
-						ClinicoGeralController.incluir(clinico);
+						clinicoGeralService.incluir(clinico);
 					} catch (PeriodoInvalidoException e) {
 						System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
 					} 

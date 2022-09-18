@@ -5,18 +5,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.controller.EnderecoController;
 import br.edu.infinet.seuhospital.model.domain.Endereco;
 import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
+import br.edu.infinet.seuhospital.model.service.EnderecoService;
 
 @Order(2)
 @Component
 public class EnderecoTeste implements ApplicationRunner {
+	
+	@Autowired
+	EnderecoService enderecoService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -40,7 +44,7 @@ public class EnderecoTeste implements ApplicationRunner {
 
 					try {
 			 			Endereco endereco1 = new Endereco(campos[0] ,Integer.valueOf(campos[1]), campos[2], campos[3], campos[4]);
-			 			EnderecoController.incluir(endereco1);
+			 			enderecoService.incluir(endereco1);
 			 			
 					} catch (RuaNaoPreenchidoException e) {
 						System.out.println("[ERROR] " + e.getMessage());

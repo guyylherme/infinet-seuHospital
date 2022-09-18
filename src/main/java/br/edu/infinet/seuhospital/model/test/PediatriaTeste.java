@@ -5,16 +5,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.controller.PediatriaController;
 import br.edu.infinet.seuhospital.model.domain.Pediatria;
 import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
+import br.edu.infinet.seuhospital.model.service.PediatriaService;
 
 @Component
 public class PediatriaTeste implements ApplicationRunner {
+	
+	@Autowired
+	PediatriaService pediatriaService; 
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -38,7 +42,7 @@ public class PediatriaTeste implements ApplicationRunner {
 						String[] campos = linha.split(";");
 						
 						Pediatria pediatria = new Pediatria();
-						pediatria.setCodigo(Integer.valueOf(campos[0]));
+						pediatria.setCodigo(campos[0]);
 						pediatria.setNome(campos[1]);
 						pediatria.setStatus(Boolean.valueOf(campos[2]));
 						
@@ -49,7 +53,7 @@ public class PediatriaTeste implements ApplicationRunner {
 						pediatria.setValorHora(Float.valueOf(campos[6]));
 						pediatria.calcularValorHora();
 						
-						PediatriaController.incluir(pediatria);
+						pediatriaService.incluir(pediatria);
 					} catch (ValorHoraZeradoException e) {
 						System.out.println("[ERROR - PEDIATRIA] " + e.getMessage());
 					} 

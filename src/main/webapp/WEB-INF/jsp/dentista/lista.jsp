@@ -26,7 +26,10 @@
 		
 		<div class="container-fluid pt-5 w-100 dentista">
 		
-			<h4>Classe: Dentista</h4>
+			<div class="row">
+				<div class="col-6 text-left"><h4>Dentista</h4></div>
+				<div class="col-6 text-right"><h4><a href="/dentista/incluir">Novo dentista</a></h4></div>
+			</div>
 		
 			<table class="table table-hover">
 				<thead>

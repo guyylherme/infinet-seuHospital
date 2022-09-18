@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Seu Hospital</title>
+<title>Cadastro de Pediatra</title>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -13,6 +13,8 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 </head>
+ 
+
 <body>
 
 
@@ -20,54 +22,44 @@
 
 
 	<div class="container mb-5">
-	
-		<h2 class="mt-4">Infinet - Seu Hospital</h2>
- 
-		
-		<div class="container-fluid pt-5 w-100 dentista">
-					
-			<div class="row">
-				<div class="col-6 text-left"><h4>Endereços</h4></div> 
-			</div>
-		
-			<table class="table table-hover">
-				<thead>
-					<tr> 
-						<th scope="col">ID</th>
-						<th scope="col">Rua</th>
-						<th scope="col">Numero</th>
-						<th scope="col">Estado</th>
-						<th scope="col">País</th>
-						<th scope="col">CEP</th> 
-						<th scope="col"></th> 
-					</tr>
-				</thead>
+
+		<div class="container mt-3">
+			<h2 class="mb-3">Cadastramento de Pediatra</h2>
+			<form action="/pediatra/incluir" method="POST">
+
+				<jsp:include page="../especialidade/cadastro.jsp" />
 				
-				<tbody>
+				<div class="row mt-2">
+					<div class="col">
+						<label for="apenasBebes" >Apenas Bebês:</label>
+						<select name="apenasBebes" class="form-control">
+							<option value="true">Sim</option>
+							<option selected value="false">Não</option>
+						</select>
+					</div>
 					
-					<c:forEach var="endereco" items="${ listagem }">
+					<div class="col">
+						<label for="neonatologia" >Neonatalogia:</label>
+						<select name="neonatologia" class="form-control">
+							<option value="true">Sim</option>
+							<option selected value="false">Não</option>
+						</select>
+					</div>
+					
+					<div class="col">
+						<label for="cardiologia" >Cardiologia:</label>
+						<select name="cardiologia" class="form-control">
+							<option value="true">Sim</option>
+							<option selected value="false">Não</option>
+						</select>
+					</div>
+				</div> 			
 
-						<tr>
-							<th>#${endereco.id}</th>
-							<td>${endereco.rua}</td>
-							<td>${endereco.numero}</td>
-							<td>${endereco.estado}</td>
-							<td>${endereco.pais}</td>
-							<td>${endereco.cep}</td> 
-							<td><a href="/endereco/${endereco.id}/excluir">excluir</a></td>
-						</tr>
-
-					</c:forEach>
-
-				</tbody>
-			</table>
+				<button type="submit" class="btn btn-primary mt-4">Cadastrar</button>
+			</form>
 		</div>
-		
-		 
-		
+
 	</div>
-
-
 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -81,9 +73,10 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-		
-	<script> 
-		$('.nav-item.endereco').addClass('active'); 
+
+	<script>
+		$('.nav-item.home').addClass('active');
 	</script>
+
 </body>
 </html>

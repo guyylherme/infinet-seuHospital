@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.controller.HospitalController;
 import br.edu.infinet.seuhospital.model.domain.ClinicoGeral;
 import br.edu.infinet.seuhospital.model.domain.Dentista;
 import br.edu.infinet.seuhospital.model.domain.Endereco;
@@ -22,10 +22,14 @@ import br.edu.infinet.seuhospital.model.domain.Pediatria;
 import br.edu.infinet.seuhospital.model.exceptions.EnderecoNuloException;
 import br.edu.infinet.seuhospital.model.exceptions.EspecialidadeNulaVaziaException;
 import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
+import br.edu.infinet.seuhospital.model.service.HospitalService;
 
 @Order(1)
 @Component
 public class HospitalTeste implements ApplicationRunner {
+	
+	@Autowired
+	HospitalService hospitalService;	
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -33,7 +37,7 @@ public class HospitalTeste implements ApplicationRunner {
 		System.out.println("#HospitalTeste");
 
 		ClinicoGeral clinico = new ClinicoGeral();
-		clinico.setCodigo(02);
+		clinico.setCodigo("XPCC2");
 		clinico.setNome("Débora");
 		clinico.setStatus(false);
 
@@ -43,7 +47,7 @@ public class HospitalTeste implements ApplicationRunner {
 		clinico.setTurno("Noturno");
 
 		Dentista dentista = new Dentista();
-		dentista.setCodigo(01);
+		dentista.setCodigo("XPz1");
 		dentista.setNome("Márcio");
 		dentista.setStatus(true);
 
@@ -53,7 +57,7 @@ public class HospitalTeste implements ApplicationRunner {
 		dentista.setTurno("Diúrno");
 
 		Pediatria pediatria = new Pediatria();
-		pediatria.setCodigo(03);
+		pediatria.setCodigo("CPAs3");
 		pediatria.setNome("Jessica");
 		pediatria.setStatus(false);
 
@@ -88,7 +92,7 @@ public class HospitalTeste implements ApplicationRunner {
 
 						Endereco enderecoHospital1 = new Endereco(campos[3], Integer.valueOf(campos[4]), campos[5],campos[6], campos[7]);
 						Hospital hospital1 = new Hospital(campos[0], campos[1], campos[2], enderecoHospital1,listaEspecialidadesHospital1);
-						HospitalController.incluir(hospital1);
+						hospitalService.incluir(hospital1);
 
 					} catch (EnderecoNuloException | EspecialidadeNulaVaziaException | RuaNaoPreenchidoException e) {
 						System.out.println("[ ERROR - HOSPITAL TESTE ] " + e.getMessage());

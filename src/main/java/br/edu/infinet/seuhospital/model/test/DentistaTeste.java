@@ -5,77 +5,76 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.controller.DentistaController;
 import br.edu.infinet.seuhospital.model.domain.Dentista;
 import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
+import br.edu.infinet.seuhospital.model.service.DentistaService;
 
-@Component 
+@Component
 public class DentistaTeste implements ApplicationRunner {
- 
-		@Override
-		public void run(ApplicationArguments args) throws Exception {
-			System.out.println();
-			System.out.println("#DentistaTeste");
-			 
-			String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
-			String arq = "dentistas.txt";
+
+	@Autowired
+	DentistaService dentistaService;
+
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		System.out.println();
+		System.out.println("#DentistaTeste");
+
+		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
+		String arq = "dentistas.txt";
+
+		try {
 
 			try {
+				FileReader fileReader = new FileReader(dir + arq);
+				BufferedReader leitura = new BufferedReader(fileReader);
 
-				try {
-					FileReader fileReader = new FileReader(dir + arq);
-					BufferedReader leitura = new BufferedReader(fileReader);
+				String linha = leitura.readLine();
+				while (linha != null) {
 
-					String linha = leitura.readLine();
-					while (linha != null) {
+					try {
 
-						try {
-							
-							String[] campos = linha.split(";");
-							
-							Dentista dentista = new Dentista();
-							dentista.setCodigo(Integer.valueOf(campos[0]));
-							dentista.setNome(campos[1]);
-							dentista.setStatus(Boolean.valueOf(campos[2]));
-							
-							dentista.setAtendeCrianca(Boolean.valueOf(campos[3]));
-							dentista.setCirurgia(Boolean.valueOf(campos[4]));							
-							dentista.setTurno(campos[6]); 
-							
-							dentista.setValorHora(Float.valueOf(campos[5]));
-							dentista.calcularValorHora();
-							
-							DentistaController.incluir(dentista);
-							
-						} catch (ValorHoraZeradoException e) {
-							System.out.println("[ ERROR - DENTISTA ] " + e.getMessage());
-						}
+						String[] campos = linha.split(";");
 
-						linha = leitura.readLine();
+						Dentista dentista = new Dentista();
+						dentista.setCodigo(campos[0]);
+						dentista.setNome(campos[1]);
+						dentista.setStatus(Boolean.valueOf(campos[2]));
+
+						dentista.setAtendeCrianca(Boolean.valueOf(campos[3]));
+						dentista.setCirurgia(Boolean.valueOf(campos[4]));
+						dentista.setTurno(campos[6]);
+
+						dentista.setValorHora(Float.valueOf(campos[5]));
+						dentista.calcularValorHora();
+
+						dentistaService.incluir(dentista);
+
+					} catch (ValorHoraZeradoException e) {
+						System.out.println("[ ERROR - DENTISTA ] " + e.getMessage());
 					}
 
-					leitura.close();
-					fileReader.close();
-
-				} catch (FileNotFoundException e) {
-					System.out.println("[ERROR] O arquivo não existe!");
-				} catch (IOException e) {
-					System.out.println("[ERROR] Problemas no fechamaneto do arquivo!");
+					linha = leitura.readLine();
 				}
 
-			} finally {
-				System.out.println("Processo finalizado!");
+				leitura.close();
+				fileReader.close();
+
+			} catch (FileNotFoundException e) {
+				System.out.println("[ERROR] O arquivo não existe!");
+			} catch (IOException e) {
+				System.out.println("[ERROR] Problemas no fechamaneto do arquivo!");
 			}
-			
-			
-		
-			
+
+		} finally {
+			System.out.println("Processo finalizado!");
 		}
-		
-		 
+
+	}
 
 }

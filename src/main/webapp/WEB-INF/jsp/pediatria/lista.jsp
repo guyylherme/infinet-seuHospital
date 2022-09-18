@@ -25,8 +25,11 @@
  
 		
 		<div class="container-fluid pt-5 w-100 dentista">
-		
-			<h4>Classe: Pediatra</h4>
+		 
+			<div class="row">
+				<div class="col-6 text-left"><h4>Pediatra</h4></div>
+				<div class="col-6 text-right"><h4><a href="/pediatra/incluir">Novo pediatra</a></h4></div>
+			</div>
 		
 			<table class="table table-hover">
 				<thead>

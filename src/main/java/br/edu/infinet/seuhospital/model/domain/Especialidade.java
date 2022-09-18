@@ -6,7 +6,7 @@ public abstract class Especialidade implements IPrinter {
 	
 	private Integer id; 
 	private String nome;
-	private int codigo;
+	private String codigo;
 	private boolean status;	
 	private float valorHora; 
 	 
@@ -37,11 +37,11 @@ public abstract class Especialidade implements IPrinter {
 		this.nome = nome;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -61,11 +61,14 @@ public abstract class Especialidade implements IPrinter {
 		this.status = status;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + codigo;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -75,10 +78,18 @@ public abstract class Especialidade implements IPrinter {
 			return true;
 		if (obj == null)
 			return false;
-		//if (getClass() != obj.getClass())
-		//	return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Especialidade other = (Especialidade) obj;
-		if (codigo != other.codigo)
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

@@ -26,7 +26,10 @@
 		
 		<div class="container-fluid pt-5 w-100 dentista">
 		
-			<h4>Classe: Especialidade</h4>
+			<div class="row">
+				<div class="col-6 text-left"><h4>Especialidades</h4></div>
+				<div class="col-6 text-right"><h4><a href="/especialidade/incluir">Novo especialidade</a></h4></div>
+			</div>
 		
 			<table class="table table-hover">
 				<thead>
