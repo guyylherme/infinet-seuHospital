@@ -17,6 +17,8 @@ public class HospitalService {
 	
 	public void incluir(Hospital hospital) { 
 		
+		System.out.println("Entrou aq2");
+		
 		try {
 			hospital.setId(id++);		 
 			mapaHospital.put(hospital.getId(), hospital);

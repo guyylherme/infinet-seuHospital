@@ -1,9 +1,19 @@
 package br.edu.infinet.seuhospital.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
 
+@Entity
+@Table()
 public class Cliente implements IPrinter {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; 
 	private String nome; 
 	private String email;

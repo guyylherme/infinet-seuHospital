@@ -26,7 +26,7 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 		System.out.println("#ClinicoGeralTeste");
 		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
-		String arq = "clinicosGerais.txt";
+		String arq = "especialidades.txt";
  
 		try {
 
@@ -36,27 +36,28 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 
 				String linha = leitura.readLine();
 				while (linha != null) {
-
-					try {
-						
-						String[] campos = linha.split(";");
-						
-						ClinicoGeral clinico = new ClinicoGeral();
-						clinico.setCodigo(campos[0]);
-						clinico.setNome(campos[1]);
-						clinico.setStatus(Boolean.valueOf(campos[2]));
-						
-						clinico.setDescricao(campos[3]);
-						clinico.setDiarista(Boolean.valueOf(campos[4]));						
-						clinico.setTurno(campos[6]);  
-						
-						clinico.setValorHora(Float.valueOf(campos[5]));
-						clinico.calcularValorHora();
-						
-						clinicoGeralService.incluir(clinico);
-					} catch (PeriodoInvalidoException e) {
-						System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
-					} 
+					
+					String[] campos = linha.split(";");
+					
+					if("C".equalsIgnoreCase(campos[0])) {
+						try {  
+							ClinicoGeral clinico = new ClinicoGeral();
+							clinico.setCodigo(campos[1]);
+							clinico.setNome(campos[2]);
+							clinico.setStatus(Boolean.valueOf(campos[3]));
+							
+							clinico.setDescricao(campos[4]);
+							clinico.setDiarista(Boolean.valueOf(campos[5]));						
+							clinico.setTurno(campos[7]);  
+							
+							clinico.setValorHora(Float.valueOf(campos[6]));
+							clinico.calcularValorHora();
+							
+							clinicoGeralService.incluir(clinico);
+						} catch (PeriodoInvalidoException e) {
+							System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
+						} 
+					}
 
 					linha = leitura.readLine();
 				}

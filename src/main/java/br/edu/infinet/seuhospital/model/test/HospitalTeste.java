@@ -21,82 +21,130 @@ import br.edu.infinet.seuhospital.model.domain.Hospital;
 import br.edu.infinet.seuhospital.model.domain.Pediatria;
 import br.edu.infinet.seuhospital.model.exceptions.EnderecoNuloException;
 import br.edu.infinet.seuhospital.model.exceptions.EspecialidadeNulaVaziaException;
+import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
 import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
+import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
+import br.edu.infinet.seuhospital.model.service.EspecialidadeService;
 import br.edu.infinet.seuhospital.model.service.HospitalService;
 
 @Order(1)
 @Component
 public class HospitalTeste implements ApplicationRunner {
+
+	@Autowired
+	HospitalService hospitalService;
 	
 	@Autowired
-	HospitalService hospitalService;	
+	EspecialidadeService especialidadeService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#HospitalTeste");
-
-		ClinicoGeral clinico = new ClinicoGeral();
-		clinico.setCodigo("XPCC2");
-		clinico.setNome("Débora");
-		clinico.setStatus(false);
-
-		clinico.setDescricao("Responsável por acompanhar problemas de saúde");
-		clinico.setDiarista(true);
-		clinico.setValorHora(22);
-		clinico.setTurno("Noturno");
-
-		Dentista dentista = new Dentista();
-		dentista.setCodigo("XPz1");
-		dentista.setNome("Márcio");
-		dentista.setStatus(true);
-
-		dentista.setAtendeCrianca(true);
-		dentista.setCirurgia(true);
-		dentista.setValorHora(23);
-		dentista.setTurno("Diúrno");
-
-		Pediatria pediatria = new Pediatria();
-		pediatria.setCodigo("CPAs3");
-		pediatria.setNome("Jessica");
-		pediatria.setStatus(false);
-
-		pediatria.setApenasBebes(true);
-		pediatria.setCardiologia(true);
-		pediatria.setNeonatologia(true);
-		pediatria.setValorHora(20);
+ 
 
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
-		String arq = "hospitais.txt";
+		String arq = "especialidades.txt";
 
 		try {
 
 			try {
 				FileReader fileReader = new FileReader(dir + arq);
 				BufferedReader leitura = new BufferedReader(fileReader);
+				Set<Especialidade> especialidades = new HashSet<Especialidade>(); 
 
 				String linha = leitura.readLine();
 				while (linha != null) {
 
-					try {
+					String[] campos = linha.split(";"); 	
 
-						String[] campos = linha.split(";");
+					switch (campos[0].toUpperCase()) {					
+					case "H":
+						try {
+							System.out.println("*******************************");
+							especialidades = new HashSet<Especialidade>(); 
+							Endereco endereco = new Endereco(campos[4], Integer.valueOf(campos[5]), campos[6],campos[7], campos[8]);
+							Hospital hospital = new Hospital(campos[1], campos[2], campos[3], endereco, especialidades);							
+							hospitalService.incluir(hospital);
 
-						// Criação de uma coleção de produtos
-						Set<Especialidade> listaEspecialidadesHospital1 = new HashSet<Especialidade>();
+						} catch (EnderecoNuloException | EspecialidadeNulaVaziaException | RuaNaoPreenchidoException e) {
+							System.out.println("[ ERROR - HOSPITAL TESTE ] " + e.getMessage());
+						}
+						break;
+ 
+					case "D":
+						try { 
+							Dentista dentista = new Dentista();
+							dentista.setCodigo(campos[1]);
+							dentista.setNome(campos[2]);
+							dentista.setStatus(Boolean.valueOf(campos[3]));
 
-						// Adicionar produtos a coleção
-						listaEspecialidadesHospital1.add(clinico);
-						listaEspecialidadesHospital1.add(dentista);
-						listaEspecialidadesHospital1.add(pediatria);
+							dentista.setAtendeCrianca(Boolean.valueOf(campos[4]));
+							dentista.setCirurgia(Boolean.valueOf(campos[5]));
+							dentista.setTurno(campos[7]);
 
-						Endereco enderecoHospital1 = new Endereco(campos[3], Integer.valueOf(campos[4]), campos[5],campos[6], campos[7]);
-						Hospital hospital1 = new Hospital(campos[0], campos[1], campos[2], enderecoHospital1,listaEspecialidadesHospital1);
-						hospitalService.incluir(hospital1);
+							dentista.setValorHora(Float.valueOf(campos[6]));
+							dentista.calcularValorHora();  
 
-					} catch (EnderecoNuloException | EspecialidadeNulaVaziaException | RuaNaoPreenchidoException e) {
-						System.out.println("[ ERROR - HOSPITAL TESTE ] " + e.getMessage());
+							especialidades.add(dentista);
+							especialidadeService.incluir(dentista);
+							
+						} catch (ValorHoraZeradoException e) {
+							System.out.println("[ ERROR - DENTISTA ] " + e.getMessage());
+						}						
+						
+						break;
+
+					case "C":
+						try {  
+							ClinicoGeral clinico = new ClinicoGeral();
+							clinico.setCodigo(campos[1]);
+							clinico.setNome(campos[2]);
+							clinico.setStatus(Boolean.valueOf(campos[3]));
+							
+							clinico.setDescricao(campos[4]);
+							clinico.setDiarista(Boolean.valueOf(campos[5]));						
+							clinico.setTurno(campos[7]);  
+							
+							clinico.setValorHora(Float.valueOf(campos[6]));
+							clinico.calcularValorHora();
+							
+							especialidades.add(clinico);
+							especialidadeService.incluir(clinico);
+							
+						} catch (PeriodoInvalidoException e) {
+							System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
+						} 
+						
+						break;
+					case "P":
+						try { 
+							 
+							Pediatria pediatria = new Pediatria();
+							pediatria.setCodigo(campos[1]);
+							pediatria.setNome(campos[2]);
+							pediatria.setStatus(Boolean.valueOf(campos[3]));
+							
+							pediatria.setApenasBebes(Boolean.valueOf(campos[4]));
+							pediatria.setCardiologia(Boolean.valueOf(campos[5]));						
+							pediatria.setNeonatologia(Boolean.valueOf(campos[6]));  
+							
+							pediatria.setValorHora(Float.valueOf(campos[7]));
+							pediatria.calcularValorHora();
+							 
+							especialidades.add(pediatria);
+							especialidadeService.incluir(pediatria);
+							
+						} catch (ValorHoraZeradoException e) {
+							System.out.println("[ERROR - PEDIATRIA] " + e.getMessage());
+						} 
+						
+						break;
+						
+					default:
+						break;
 					}
+  
 
 					linha = leitura.readLine();
 				}

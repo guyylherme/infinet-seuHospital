@@ -8,13 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.edu.infinet.seuhospital.model.domain.Hospital;
+import br.edu.infinet.seuhospital.model.service.EnderecoService;
+import br.edu.infinet.seuhospital.model.service.EspecialidadeService;
 import br.edu.infinet.seuhospital.model.service.HospitalService;
 
 @Controller
 public class HospitalController {
 	 
 	@Autowired
-	HospitalService hospitalService;	
+	HospitalService hospitalService;
+	
+	@Autowired
+	EspecialidadeService especialidadeService;
+	
+	@Autowired
+	EnderecoService enderecoService;
 	 
 	@GetMapping(value = "/hospital/lista")
 	public String telaHospital(Model model) {
@@ -24,12 +32,20 @@ public class HospitalController {
 	}
 		
 	@GetMapping(value = "/hospital/incluir")
-	public String telaCadastro() { 
+	public String telaCadastro(Model model) { 
+		
+		model.addAttribute("enderecos", enderecoService.obterLista());
+		model.addAttribute("especialidades", especialidadeService.obterLista());
+		
 		return "hospital/cadastro";
 	}
 	
 	@PostMapping(value = "/hospital/incluir")
-	public String incluir(Hospital hospital){		
+	public String incluir(Hospital hospital){	
+		
+		System.out.println("Entrou aq 1");
+		System.out.println(hospital);
+		
 		hospitalService.incluir(hospital);	
 		
 		return "redirect:/hospital/lista";

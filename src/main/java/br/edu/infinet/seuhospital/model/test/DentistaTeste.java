@@ -26,7 +26,7 @@ public class DentistaTeste implements ApplicationRunner {
 		System.out.println("#DentistaTeste");
 
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
-		String arq = "dentistas.txt";
+		String arq = "especialidades.txt";
 
 		try {
 
@@ -36,27 +36,28 @@ public class DentistaTeste implements ApplicationRunner {
 
 				String linha = leitura.readLine();
 				while (linha != null) {
+					
+					String[] campos = linha.split(";");
+					
+					if("D".equalsIgnoreCase(campos[0])) {
+						try { 
+							Dentista dentista = new Dentista();
+							dentista.setCodigo(campos[1]);
+							dentista.setNome(campos[2]);
+							dentista.setStatus(Boolean.valueOf(campos[3]));
 
-					try {
+							dentista.setAtendeCrianca(Boolean.valueOf(campos[4]));
+							dentista.setCirurgia(Boolean.valueOf(campos[5]));
+							dentista.setTurno(campos[7]);
 
-						String[] campos = linha.split(";");
+							dentista.setValorHora(Float.valueOf(campos[6]));
+							dentista.calcularValorHora();
 
-						Dentista dentista = new Dentista();
-						dentista.setCodigo(campos[0]);
-						dentista.setNome(campos[1]);
-						dentista.setStatus(Boolean.valueOf(campos[2]));
+							dentistaService.incluir(dentista);
 
-						dentista.setAtendeCrianca(Boolean.valueOf(campos[3]));
-						dentista.setCirurgia(Boolean.valueOf(campos[4]));
-						dentista.setTurno(campos[6]);
-
-						dentista.setValorHora(Float.valueOf(campos[5]));
-						dentista.calcularValorHora();
-
-						dentistaService.incluir(dentista);
-
-					} catch (ValorHoraZeradoException e) {
-						System.out.println("[ ERROR - DENTISTA ] " + e.getMessage());
+						} catch (ValorHoraZeradoException e) {
+							System.out.println("[ ERROR - DENTISTA ] " + e.getMessage());
+						}
 					}
 
 					linha = leitura.readLine();

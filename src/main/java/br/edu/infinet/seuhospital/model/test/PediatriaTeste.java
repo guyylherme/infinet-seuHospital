@@ -26,7 +26,7 @@ public class PediatriaTeste implements ApplicationRunner {
 		System.out.println("#PediatriaTeste"); 
  		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
-		String arq = "pediatras.txt";
+		String arq = "especialidades.txt";
 
 		try {
 
@@ -36,27 +36,29 @@ public class PediatriaTeste implements ApplicationRunner {
 
 				String linha = leitura.readLine();
 				while (linha != null) {
-
-					try {
-						
-						String[] campos = linha.split(";");
-						
-						Pediatria pediatria = new Pediatria();
-						pediatria.setCodigo(campos[0]);
-						pediatria.setNome(campos[1]);
-						pediatria.setStatus(Boolean.valueOf(campos[2]));
-						
-						pediatria.setApenasBebes(Boolean.valueOf(campos[3]));
-						pediatria.setCardiologia(Boolean.valueOf(campos[4]));						
-						pediatria.setNeonatologia(Boolean.valueOf(campos[5]));  
-						
-						pediatria.setValorHora(Float.valueOf(campos[6]));
-						pediatria.calcularValorHora();
-						
-						pediatriaService.incluir(pediatria);
-					} catch (ValorHoraZeradoException e) {
-						System.out.println("[ERROR - PEDIATRIA] " + e.getMessage());
-					} 
+					
+					String[] campos = linha.split(";");  
+					
+					if("P".equalsIgnoreCase(campos[0])) {
+						try { 
+ 
+							Pediatria pediatria = new Pediatria();
+							pediatria.setCodigo(campos[1]);
+							pediatria.setNome(campos[2]);
+							pediatria.setStatus(Boolean.valueOf(campos[3]));
+							
+							pediatria.setApenasBebes(Boolean.valueOf(campos[4]));
+							pediatria.setCardiologia(Boolean.valueOf(campos[5]));						
+							pediatria.setNeonatologia(Boolean.valueOf(campos[6]));  
+							
+							pediatria.setValorHora(Float.valueOf(campos[7]));
+							pediatria.calcularValorHora();
+							
+							pediatriaService.incluir(pediatria);
+						} catch (ValorHoraZeradoException e) {
+							System.out.println("[ERROR - PEDIATRIA] " + e.getMessage());
+						} 
+					}
 
 					linha = leitura.readLine();
 				}

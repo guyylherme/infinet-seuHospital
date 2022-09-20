@@ -25,9 +25,10 @@
  
 		
 		<div class="container-fluid pt-5 w-100 dentista">
-					
+					 
 			<div class="row">
-				<div class="col-6 text-left"><h4>Endereços</h4></div> 
+				<div class="col-6 text-left"><h4>Endereços</h4></div>
+				<div class="col-6 text-right"><h4><a href="/endereco/incluir">Novo endereço</a></h4></div>
 			</div>
 		
 			<table class="table table-hover">

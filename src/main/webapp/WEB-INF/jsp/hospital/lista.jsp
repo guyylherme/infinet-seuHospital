@@ -28,7 +28,7 @@
 		<div class="container-fluid pt-5 dentista">
 
 			<div class="row">
-				<div class="col-6 text-left"><h4>Hospitáis</h4></div>
+				<div class="col-6 text-left"><h4>Hospitais</h4></div>
 				<div class="col-6 text-right"><h4><a href="/hospital/incluir">Novo hospital</a></h4></div>
 			</div>
 

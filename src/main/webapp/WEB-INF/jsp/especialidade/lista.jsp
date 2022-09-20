@@ -28,7 +28,7 @@
 		
 			<div class="row">
 				<div class="col-6 text-left"><h4>Especialidades</h4></div>
-				<div class="col-6 text-right"><h4><a href="/especialidade/incluir">Novo especialidade</a></h4></div>
+				<!--  <div class="col-6 text-right"><h4><a href="/especialidade/incluir">Novo especialidade</a></h4></div>-->
 			</div>
 		
 			<table class="table table-hover">
