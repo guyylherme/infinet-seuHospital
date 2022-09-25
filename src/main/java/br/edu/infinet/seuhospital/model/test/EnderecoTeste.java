@@ -43,8 +43,8 @@ public class EnderecoTeste implements ApplicationRunner {
 					String[] campos = linha.split(";");
 
 					try {
-			 			Endereco endereco1 = new Endereco(campos[0] ,Integer.valueOf(campos[1]), campos[2], campos[3], campos[4]);
-			 			enderecoService.incluir(endereco1);
+			 			Endereco endereco = new Endereco(campos[0] ,Integer.valueOf(campos[1]), campos[2], campos[3], campos[4]);
+			 			enderecoService.incluir(endereco);
 			 			
 					} catch (RuaNaoPreenchidoException e) {
 						System.out.println("[ERROR] " + e.getMessage());

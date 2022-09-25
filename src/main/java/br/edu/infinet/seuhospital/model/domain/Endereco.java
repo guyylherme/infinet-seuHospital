@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
@@ -22,6 +24,14 @@ public class Endereco implements IPrinter {
 	private String pais;
 	private String cep;
 	
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
+	private Usuario usuario;
+	
+	public Endereco() {
+		super();
+	}
+
 	public void impressao() {
 		System.out.println("#Pedido");
 		System.out.println(this);
@@ -46,6 +56,16 @@ public class Endereco implements IPrinter {
 	public String toString() {
 		return "Endereco [rua=" + rua + ", numero=" + numero + ", estado=" + estado + ", pais=" + pais + ", cep=" + cep
 				+ "]";
+	}
+	
+	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public int getNumero() {

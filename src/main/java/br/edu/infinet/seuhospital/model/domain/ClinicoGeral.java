@@ -1,13 +1,24 @@
 package br.edu.infinet.seuhospital.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
 
 /**
  * @author Guylherme
  *
  */
+@Entity
+@Table()
 public class ClinicoGeral extends Especialidade{
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id; 
 	public String turno; 
 	public String descricao;
 	public boolean diarista;

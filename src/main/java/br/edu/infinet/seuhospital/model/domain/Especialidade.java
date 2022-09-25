@@ -4,12 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
 
 @Entity
 @Table()
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Especialidade implements IPrinter {
 	
 	@Id

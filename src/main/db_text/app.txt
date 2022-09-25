@@ -1,5 +1,5 @@
 P;AppHospital;Navegue pelos itens do menu para visualizar as classes do programa.;
-C;Cliente;
+C;Usuario;
 A;nome;String;O nome do usuário;
 A;email;String;O email do usuário;
 A;senha;String;A senha do usuário;

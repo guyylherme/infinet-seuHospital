@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Seu Hospital - Clientes</title>
+<title>Seu Hospital - Usuarios</title>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -26,7 +26,7 @@
 		
 		<div class="container-fluid pt-5 w-100 dentista">
 		
-			<h4>Clientes</h4>
+			<h4>Usuarios</h4>
 		
 			<table class="table table-hover">
 				<thead>
@@ -41,14 +41,14 @@
 				
 				<tbody>
 				
-					<c:forEach var="cliente" items="${ listagem }">
+					<c:forEach var="usuario" items="${ listagem }">
 				
 						<tr>
-							<th>#${cliente.id}</th> 
-							<td>${cliente.nome}</td>
-							<td>${cliente.email}</td>
-							<td>${cliente.senha}</td> 
-							<td><a href="/cliente/${cliente.email}/excluir">excluir</a></td>
+							<th>#${usuario.id}</th> 
+							<td>${usuario.nome}</td>
+							<td>${usuario.email}</td>
+							<td>${usuario.senha}</td> 
+							<td><a href="/usuario/${usuario.email}/excluir">excluir</a></td>
 						</tr>
 					
 					</c:forEach>
@@ -77,7 +77,7 @@
 		crossorigin="anonymous"></script>
 		
 	<script> 
-		$('.nav-item.cliente').addClass('active'); 
+		$('.nav-item.usuario').addClass('active'); 
 	</script>
 </body>
 </html>

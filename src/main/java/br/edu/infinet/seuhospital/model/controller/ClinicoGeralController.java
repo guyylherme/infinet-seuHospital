@@ -14,7 +14,7 @@ import br.edu.infinet.seuhospital.model.service.ClinicoGeralService;
 public class ClinicoGeralController {
 	
 	@Autowired
-	ClinicoGeralService clinicoGeralService;	
+	private ClinicoGeralService clinicoGeralService;	
 	 
 	
 	@GetMapping(value = "/clinicoGeral/lista")

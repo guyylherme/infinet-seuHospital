@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import br.edu.infinet.seuhospital.model.domain.Cliente;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.service.AppService;
-import br.edu.infinet.seuhospital.model.service.ClienteService;
+import br.edu.infinet.seuhospital.model.service.UsuarioService;
 
 @SessionAttributes("user")
 @Controller
 public class AppController {
 	
 	@Autowired
-	AppService appService;
+	private AppService appService;
+	
+	@Autowired
+	private UsuarioService usuarioService; 
 	
 	@GetMapping(value = "/")
 	public String telaHome(Model model) { 
@@ -38,9 +41,9 @@ public class AppController {
 	@PostMapping(value = "/login")
 	public String login(Model model, @RequestParam String email, @RequestParam String senha) {
 		
-		Cliente cliente = new ClienteService().validar(email, senha);		
-		if(cliente != null) {			 
-			model.addAttribute("user", cliente);			
+		Usuario usuario = usuarioService.validar(email, senha);		
+		if(usuario != null) {			 
+			model.addAttribute("user", usuario);			
 			return "home"; 
 		}		
 		return "login"; 

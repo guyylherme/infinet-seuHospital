@@ -1,16 +1,20 @@
 package br.edu.infinet.seuhospital.model.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
 
 @Entity
 @Table()
-public class Cliente implements IPrinter {
+public class Usuario implements IPrinter {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +23,28 @@ public class Cliente implements IPrinter {
 	private String email;
 	private String senha; 
 	  
+	@OneToMany
+	@JoinColumn(name="idUsuario")
+	private List<Endereco> enderecos;
 	
 	public void impressao() {
-		System.out.println("#Cliente");
+		System.out.println("#Usuario");
 		System.out.println(this);
 	}
 	
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+	}
+	
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
 	public Integer getId() {
 		return id;

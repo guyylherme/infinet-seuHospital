@@ -40,6 +40,7 @@
 						<th scope="col">Estado</th>
 						<th scope="col">País</th>
 						<th scope="col">CEP</th> 
+						<th scope="col">Usuário</th> 
 						<th scope="col"></th> 
 					</tr>
 				</thead>
@@ -55,6 +56,7 @@
 							<td>${endereco.estado}</td>
 							<td>${endereco.pais}</td>
 							<td>${endereco.cep}</td> 
+							<td>${endereco.usuario.nome}</td> 
 							<td><a href="/endereco/${endereco.id}/excluir">excluir</a></td>
 						</tr>
 

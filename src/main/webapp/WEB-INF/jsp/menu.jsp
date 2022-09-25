@@ -19,7 +19,7 @@
 				<li class="nav-item home"><a class="nav-link" href="/">Home</a></li>
 				
 				<c:if test="${not empty user}">				
-					<li class="nav-item cliente"><a class="nav-link" href="/cliente/lista">Cliente</a></li>	
+					<li class="nav-item usuario"><a class="nav-link" href="/usuario/lista">Usuario</a></li>	
 					<li class="nav-item hospital"><a class="nav-link" href="/hospital/lista">Hospital</a></li>				
 					<li class="nav-item endereco"><a class="nav-link" href="/endereco/lista">Endereço</a></li>				
 					<li class="nav-item especialidade"><a class="nav-link" href="/especialidade/lista">Especialidade</a></li>
@@ -32,7 +32,7 @@
 			<ul class="navbar-nav navbar-right">
 				
 				<c:if test="${empty user}"> 
-					<li class="nav-item signup"><a class="nav-link" href="/cliente"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+					<li class="nav-item signup"><a class="nav-link" href="/usuario"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
 					<li class="nav-item login"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</c:if>	
 				

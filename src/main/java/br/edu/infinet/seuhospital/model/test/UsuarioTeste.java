@@ -5,23 +5,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infinet.seuhospital.model.domain.Cliente;
-import br.edu.infinet.seuhospital.model.service.ClienteService;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
+import br.edu.infinet.seuhospital.model.service.UsuarioService;
 
 @Component
-public class ClienteTeste implements ApplicationRunner {
+public class UsuarioTeste implements ApplicationRunner {
+	
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
-		System.out.println("#ClienteTeste");
+		System.out.println("#UsuarioTeste");
+		 
 		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
-		String arq = "clientes.txt";
+		String arq = "usuarios.txt";
  
 		try {
 
@@ -36,15 +41,16 @@ public class ClienteTeste implements ApplicationRunner {
 						
 						String[] campos = linha.split(";");
 						
-						Cliente cliente = new Cliente();
-						cliente.setId(Integer.valueOf(campos[0]));
-						cliente.setNome(campos[1]);
-						cliente.setEmail(campos[2]);
-						cliente.setSenha(campos[3]);
-						 
-						new ClienteService().incluir(cliente);
+						Usuario usuario = new Usuario();
+						usuario.setId(Integer.valueOf(campos[0]));
+						usuario.setNome(campos[1]);
+						usuario.setEmail(campos[2]);
+						usuario.setSenha(campos[3]);
+						  
+						usuarioService.incluir(usuario);
+						
 					} catch (Exception e) {
-						System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
+						System.out.println("[ERROR - USUÁRIO] " + e.getMessage());
 					} 
 
 					linha = leitura.readLine();

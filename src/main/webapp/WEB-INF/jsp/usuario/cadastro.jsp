@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Seu Hospital</title>
+<title>Cadastro de usuario</title>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -17,20 +17,35 @@
 <body>
 
 
-	<%@ include file="menu.jsp"%>
+	<jsp:include page="../menu.jsp" />
 
 
 	<div class="container mb-5">
 
-		<h1 class="kcerl8-0 sc-1ji2fn-0 kVdZZm title mt-5">Sistema de
-							cadastro e gestão de hospital</h1>
-							
-		<h6>Navegue pelos itens do menu para visualizar as classes do programa.</h6>
- 
-
+		<div class="container mt-3">
+		  <h2>Cadastramento de usuario</h2>
+		  <form action="/usuario/incluir" method="POST"> 
+		  	<div class="mb-3 mt-3">
+		      <label for="nome">Nome:</label>
+		      <input type="text" class="form-control" placeholder="Insira seu nome" name="nome">
+		    </div>
+		  
+		    <div class="mb-3 mt-3">
+		      <label for="email">Email:</label>
+		      <input type="email" class="form-control" placeholder="Insira seu email" name="email">
+		    </div>
+		    
+		    <div class="mb-3">
+		      <label for="pwd">Password:</label>
+		      <input type="password" class="form-control" placeholder="Insira sua senha" name="senha">
+		    </div> 
+		    
+		    <button type="submit" class="btn btn-primary">Cadastrar</button>
+		  </form>
+		</div>
+  
 	</div>
-
-
+ 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
