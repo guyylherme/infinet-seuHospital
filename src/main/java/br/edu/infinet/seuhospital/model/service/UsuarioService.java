@@ -45,8 +45,8 @@ public class UsuarioService {
 		return (Collection<Usuario>) usuarioRepository.findAll();
 	}
 
-	public void excluir(String email) {
-		usuarioRepository.deleteByEmail(email);
+	public void excluir(Integer id) {
+		usuarioRepository.deleteById(id);
 	}
 
 }

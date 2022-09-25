@@ -19,9 +19,9 @@ public class EnderecoController {
 	private EnderecoService enderecoService;
 	 
 	@GetMapping(value = "/endereco/lista")
-	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario user) {
+	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario usuario) {
 		 
-		model.addAttribute("listagem", enderecoService.obterLista(user));		
+		model.addAttribute("listagem", enderecoService.obterLista(usuario));		
 		return "endereco/lista";
 	}
 	

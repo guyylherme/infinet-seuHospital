@@ -10,8 +10,6 @@ import br.edu.infinet.seuhospital.model.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer>{
 
-	void deleteByEmail(String email);
-	 
 	@Query("FROM Usuario u WHERE u.email = :email and u.senha = :senha")
     public Usuario findByLoginAndSenha(@Param("email")String email, @Param("senha") String senha);
 	 

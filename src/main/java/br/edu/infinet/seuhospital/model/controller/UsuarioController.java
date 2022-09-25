@@ -36,10 +36,10 @@ public class UsuarioController{
 		return "redirect:/";
 	}
 	
-	@GetMapping(value = "/usuario/{email}/excluir")
-	public String exclusao(@PathVariable String email) {
+	@GetMapping(value = "/usuario/{id}/excluir")
+	public String exclusao(@PathVariable Integer id) {
 		
-		usuarioService.excluir(email); 		
+		usuarioService.excluir(id); 		
 		return "redirect:/usuario/lista";
 	}
 	

@@ -7,12 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.edu.infinet.seuhospital.model.domain.ClinicoGeral;
+import br.edu.infinet.seuhospital.model.domain.Pediatria;
 
 @Repository
-public interface ClinicoGeralRepository extends CrudRepository<ClinicoGeral, Integer>{
+public interface PediatraRepository extends CrudRepository<Pediatria, Integer>{
 	
-	@Query("FROM ClinicoGeral c WHERE c.usuario.id = :idUsuario") 
-	Collection<ClinicoGeral> findAll(@Param("idUsuario") Integer idUsuario);
+	@Query("FROM Pediatria p WHERE p.usuario.id = :idUsuario") 
+	Collection<Pediatria> findAll(@Param("idUsuario") Integer idUsuario);
  
 }

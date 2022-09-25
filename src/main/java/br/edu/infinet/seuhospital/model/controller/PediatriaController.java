@@ -1,4 +1,4 @@
-package br.edu.infinet.seuhospital.model.controller;
+	package br.edu.infinet.seuhospital.model.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import br.edu.infinet.seuhospital.model.domain.Pediatria;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.service.PediatriaService;
 
 @Controller
@@ -17,9 +19,9 @@ public class PediatriaController {
 	PediatriaService pediatriaService; 
 		  
 	@GetMapping(value = "/pediatra/lista")
-	public String telaPediatria(Model model) {
+	public String telaPediatria(Model model, @SessionAttribute("user") Usuario usuario) {
 		   
-		model.addAttribute("listagem", pediatriaService.obterLista());		
+		model.addAttribute("listagem", pediatriaService.obterLista(usuario));		
 		return "pediatria/lista";
 	}
 	
@@ -29,7 +31,9 @@ public class PediatriaController {
 	}
 	 
 	@PostMapping(value = "/pediatra/incluir")
-	public String incluir(Pediatria pediatra){		
+	public String incluir(Pediatria pediatra, @SessionAttribute("user") Usuario usuario){		
+		
+		pediatra.setUsuario(usuario);
 		pediatriaService.incluir(pediatra);	
 		
 		return "redirect:/pediatra/lista";

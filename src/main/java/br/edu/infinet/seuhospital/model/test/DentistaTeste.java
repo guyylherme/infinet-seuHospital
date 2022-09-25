@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import br.edu.infinet.seuhospital.model.domain.Dentista;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
 import br.edu.infinet.seuhospital.model.service.DentistaService;
 
@@ -24,6 +25,9 @@ public class DentistaTeste implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#DentistaTeste");
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(1);
 
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "especialidades.txt";
@@ -39,7 +43,7 @@ public class DentistaTeste implements ApplicationRunner {
 					
 					String[] campos = linha.split(";");
 					
-					if("D".equalsIgnoreCase(campos[0])) {
+					if("Dd".equalsIgnoreCase(campos[0])) {
 						try { 
 							Dentista dentista = new Dentista();
 							dentista.setCodigo(campos[1]);
@@ -52,6 +56,7 @@ public class DentistaTeste implements ApplicationRunner {
 
 							dentista.setValorHora(Float.valueOf(campos[6]));
 							dentista.calcularValorHora();
+							dentista.setUsuario(usuario);
 
 							dentistaService.incluir(dentista);
 

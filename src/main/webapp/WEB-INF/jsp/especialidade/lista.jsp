@@ -34,6 +34,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
+						<th scope="col">ID</th>
 						<th scope="col">Código</th>
 						<th scope="col">Nome</th>
 						<th scope="col">Status</th>
@@ -42,24 +43,18 @@
 				</thead>
 				
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Especialidade X</td>
-						<td>Ativo</td>
-						<td>0.0</td> 
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Especialidade P</td>
-						<td>Inativo</td>
-						<td>0.0</td> 
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Especialidade T</td>
-						<td>Ativo</td>
-						<td>0.0</td> 
-					</tr>
+					<c:forEach var="especialidade" items="${listagem}">
+
+						<tr>
+							<th>${especialidade.id}</th>
+							<td>${especialidade.codigo}</td>
+							<td>${especialidade.nome}</td>
+							<td>${especialidade.status}</td>
+							<td>${especialidade.valorHora}</td>
+							<td><a href="/especialidade/${especialidade.id}/excluir">excluir</a></td>
+						</tr>
+
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

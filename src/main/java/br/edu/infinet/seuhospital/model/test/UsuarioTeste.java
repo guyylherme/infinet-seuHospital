@@ -8,23 +8,24 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.service.UsuarioService;
 
+@Order(1)
 @Component
 public class UsuarioTeste implements ApplicationRunner {
 	
 	@Autowired
-	UsuarioService usuarioService;
+	UsuarioService usuarioService; 
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#UsuarioTeste");
-		 
-		
+		  
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "usuarios.txt";
  

@@ -7,9 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
@@ -27,11 +28,19 @@ public class Hospital implements IPrinter {
 	private String cnpj;
 	private String descricao;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name="idEndereco")
 	private Endereco endereco;
 	
-	@OneToMany()
+	@ManyToMany(cascade = CascadeType.DETACH) 
 	private Set<Especialidade> especialidades;
+	
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
+	private Usuario usuario; 
+	
+	public Hospital() { 
+	}
 
 	public void impressao() {
 		System.out.println("#Pedido");
@@ -44,25 +53,38 @@ public class Hospital implements IPrinter {
 			throw new EnderecoNuloException("Endereço do Hospital não pode ser nulo.");
 		}
 
-		//if (especialidades.size() < 1 || especialidades.isEmpty()) {
-		//	throw new EspecialidadeNulaVaziaException("Especialidade não pode ser vazia ou nula.");
-		//}
+//		if (especialidades.size() < 1 || especialidades.isEmpty()) {
+//			throw new EspecialidadeNulaVaziaException("Especialidade não pode ser vazia ou nula.");
+//		}
 
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.descricao = descricao;
 		this.endereco = endereco;
 		this.especialidades = especialidades;
-	}
-
-	public Set<Especialidade> getEspecialidades() {
-		return especialidades;
-	}
+	}	
 
 	@Override
 	public String toString() {
 		return "Hospital [nome=" + nome + ", cnpj=" + cnpj + ", descricao=" + descricao + ", endereco=" + endereco
 				+ ", totalEspecialidade=" + especialidades.size() + "]";
+	}
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setEspecialidades(Set<Especialidade> especialidades) {
+		this.especialidades = especialidades;
+	}
+
+	public Set<Especialidade> getEspecialidades() {
+		return especialidades;
 	}
 
 	public String getNome() {

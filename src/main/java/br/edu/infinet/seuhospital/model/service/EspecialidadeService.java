@@ -1,25 +1,26 @@
 package br.edu.infinet.seuhospital.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infinet.seuhospital.model.domain.Especialidade;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
+import br.edu.infinet.seuhospital.model.repository.EspecialidadeRepository;
 import br.edu.infinet.seuhospital.model.test.AppImpressao;
 
 @Service
 public class EspecialidadeService {
-
-	private static Map<Integer, Especialidade> mapaEspecialidade = new HashMap<Integer, Especialidade>(); 
-	private static Integer id = 1; 
+	
+	@Autowired
+	private EspecialidadeRepository especialidadeRepository; 
 	
 	public void incluir(Especialidade especialidade) { 
 		
 		try {
-			especialidade.setId(id++);		 
-			mapaEspecialidade.put(especialidade.getId(), especialidade);
+			
+			especialidadeRepository.save(especialidade);
 			
 			AppImpressao.relatorio("Inclusão do clinico " + especialidade.getNome() , especialidade);
 		} catch (Exception e) {
@@ -29,11 +30,15 @@ public class EspecialidadeService {
 	} 
 
 	public Collection<Especialidade> obterLista(){
-		return mapaEspecialidade.values();
+		return (Collection<Especialidade>) especialidadeRepository.findAll();
+	}
+	
+	public Collection<Especialidade> obterLista(Usuario usuario){
+		return especialidadeRepository.findAll(usuario.getId());
 	}
 	
 	public void excluir(Integer id){
-		mapaEspecialidade.remove(id);
+		especialidadeRepository.deleteById(id);
 	}
 
 }

@@ -1,11 +1,16 @@
 package br.edu.infinet.seuhospital.model.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.edu.infinet.seuhospital.interfaces.IPrinter;
@@ -23,22 +28,47 @@ public abstract class Especialidade implements IPrinter {
 	private boolean status;	
 	private float valorHora; 
 	
-	public Especialidade() {
-	}
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
+	private Usuario usuario;
+	
+	@ManyToMany(mappedBy = "especialidades")
+	private List<Hospital> hospitais;
+	
+	public Especialidade() {}
 	 
 	public abstract float calcularValorHora() throws Exception; 
 	
 	@Override
 	public String toString() {
-		return "Especialista=" + nome + ", codigo=" + codigo + ", ativo=" + status;
+		return "Especialidade [id=" + id + ", nome=" + nome + ", codigo=" + codigo + ", status=" + status
+				+ ", valorHora=" + valorHora + ", usuario=" + usuario + "]";
 	}
 	
 	//public float calcularValorHora(){
 	//	return valorHora;
-	//}
+	//} 
+	
+	
 	
 	public Integer getId() {
 		return id;
+	}
+
+	public List<Hospital> getHospitais() {
+		return hospitais;
+	}
+
+	public void setHospitais(List<Hospital> hospitais) {
+		this.hospitais = hospitais;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public void setId(Integer id) {

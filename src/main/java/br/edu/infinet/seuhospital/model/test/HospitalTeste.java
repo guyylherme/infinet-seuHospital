@@ -19,6 +19,7 @@ import br.edu.infinet.seuhospital.model.domain.Endereco;
 import br.edu.infinet.seuhospital.model.domain.Especialidade;
 import br.edu.infinet.seuhospital.model.domain.Hospital;
 import br.edu.infinet.seuhospital.model.domain.Pediatria;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.exceptions.EnderecoNuloException;
 import br.edu.infinet.seuhospital.model.exceptions.EspecialidadeNulaVaziaException;
 import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
@@ -27,7 +28,7 @@ import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
 import br.edu.infinet.seuhospital.model.service.EspecialidadeService;
 import br.edu.infinet.seuhospital.model.service.HospitalService;
 
-@Order(1)
+@Order(2)
 @Component
 public class HospitalTeste implements ApplicationRunner {
 
@@ -42,7 +43,9 @@ public class HospitalTeste implements ApplicationRunner {
 		System.out.println();
 		System.out.println("#HospitalTeste");
  
-
+		Usuario usuario = new Usuario();
+		usuario.setId(1);
+		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "especialidades.txt";
 
@@ -61,7 +64,6 @@ public class HospitalTeste implements ApplicationRunner {
 					switch (campos[0].toUpperCase()) {					
 					case "H":
 						try {
-							System.out.println("*******************************");
 							especialidades = new HashSet<Especialidade>(); 
 							Endereco endereco = new Endereco(campos[4], Integer.valueOf(campos[5]), campos[6],campos[7], campos[8]);
 							Hospital hospital = new Hospital(campos[1], campos[2], campos[3], endereco, especialidades);							
@@ -85,6 +87,8 @@ public class HospitalTeste implements ApplicationRunner {
 
 							dentista.setValorHora(Float.valueOf(campos[6]));
 							dentista.calcularValorHora();  
+							
+							dentista.setUsuario(usuario);
 
 							especialidades.add(dentista);
 							especialidadeService.incluir(dentista);
@@ -109,6 +113,8 @@ public class HospitalTeste implements ApplicationRunner {
 							clinico.setValorHora(Float.valueOf(campos[6]));
 							clinico.calcularValorHora();
 							
+							clinico.setUsuario(usuario);
+							
 							especialidades.add(clinico);
 							especialidadeService.incluir(clinico);
 							
@@ -131,6 +137,8 @@ public class HospitalTeste implements ApplicationRunner {
 							
 							pediatria.setValorHora(Float.valueOf(campos[7]));
 							pediatria.calcularValorHora();
+							
+							pediatria.setUsuario(usuario);
 							 
 							especialidades.add(pediatria);
 							especialidadeService.incluir(pediatria);

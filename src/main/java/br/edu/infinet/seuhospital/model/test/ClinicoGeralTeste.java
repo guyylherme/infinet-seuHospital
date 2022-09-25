@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import br.edu.infinet.seuhospital.model.domain.ClinicoGeral;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
 import br.edu.infinet.seuhospital.model.service.ClinicoGeralService;
 
@@ -21,9 +22,12 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 	ClinicoGeralService clinicoGeralService;	
 	 	
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(ApplicationArguments args) throws Exception {		
 		System.out.println();
 		System.out.println("#ClinicoGeralTeste");
+		
+		Usuario usuario = new Usuario(); 
+		usuario.setId(1);
 		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "especialidades.txt";
@@ -39,21 +43,22 @@ public class ClinicoGeralTeste implements ApplicationRunner {
 					
 					String[] campos = linha.split(";");
 					
-					if("C".equalsIgnoreCase(campos[0])) {
+					if("Cc".equalsIgnoreCase(campos[0])) {
 						try {  
-							ClinicoGeral clinico = new ClinicoGeral();
-							clinico.setCodigo(campos[1]);
-							clinico.setNome(campos[2]);
-							clinico.setStatus(Boolean.valueOf(campos[3]));
+							ClinicoGeral clinicoGeral = new ClinicoGeral();
+							clinicoGeral.setCodigo(campos[1]);
+							clinicoGeral.setNome(campos[2]);
+							clinicoGeral.setStatus(Boolean.valueOf(campos[3]));
 							
-							clinico.setDescricao(campos[4]);
-							clinico.setDiarista(Boolean.valueOf(campos[5]));						
-							clinico.setTurno(campos[7]);  
+							clinicoGeral.setDescricao(campos[4]);
+							clinicoGeral.setDiarista(Boolean.valueOf(campos[5]));						
+							clinicoGeral.setTurno(campos[7]);  
 							
-							clinico.setValorHora(Float.valueOf(campos[6]));
-							clinico.calcularValorHora();
-							
-							clinicoGeralService.incluir(clinico);
+							clinicoGeral.setValorHora(Float.valueOf(campos[6]));
+							clinicoGeral.calcularValorHora();
+							clinicoGeral.setUsuario(usuario);
+							 
+							clinicoGeralService.incluir(clinicoGeral);
 						} catch (PeriodoInvalidoException e) {
 							System.out.println("[ERROR - CLINICO GERAL] " + e.getMessage());
 						} 

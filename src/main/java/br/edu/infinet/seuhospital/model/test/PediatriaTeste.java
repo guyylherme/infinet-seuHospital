@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import br.edu.infinet.seuhospital.model.domain.Pediatria;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
 import br.edu.infinet.seuhospital.model.service.PediatriaService;
 
@@ -24,6 +25,9 @@ public class PediatriaTeste implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#PediatriaTeste"); 
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(1);
  		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "especialidades.txt";
@@ -39,7 +43,7 @@ public class PediatriaTeste implements ApplicationRunner {
 					
 					String[] campos = linha.split(";");  
 					
-					if("P".equalsIgnoreCase(campos[0])) {
+					if("Pp".equalsIgnoreCase(campos[0])) {
 						try { 
  
 							Pediatria pediatria = new Pediatria();
@@ -53,6 +57,7 @@ public class PediatriaTeste implements ApplicationRunner {
 							
 							pediatria.setValorHora(Float.valueOf(campos[7]));
 							pediatria.calcularValorHora();
+							pediatria.setUsuario(usuario);
 							
 							pediatriaService.incluir(pediatria);
 						} catch (ValorHoraZeradoException e) {

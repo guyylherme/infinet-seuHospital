@@ -27,6 +27,14 @@ public class Usuario implements IPrinter {
 	@JoinColumn(name="idUsuario")
 	private List<Endereco> enderecos;
 	
+	@OneToMany
+	@JoinColumn(name="idUsuario")
+	private List<Especialidade> especialidades;
+	
+	@OneToMany
+	@JoinColumn(name="idUsuario")
+	private List<Hospital> hospitais;
+	
 	public void impressao() {
 		System.out.println("#Usuario");
 		System.out.println(this);
@@ -37,6 +45,21 @@ public class Usuario implements IPrinter {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}
 	
+	public List<Hospital> getHospitais() {
+		return hospitais;
+	}
+
+	public void setHospitais(List<Hospital> hospitais) {
+		this.hospitais = hospitais;
+	}
+
+	public List<Especialidade> getEspecialidades() {
+		return especialidades;
+	}
+
+	public void setEspecialidades(List<Especialidade> especialidades) {
+		this.especialidades = especialidades;
+	}
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;

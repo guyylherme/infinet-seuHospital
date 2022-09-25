@@ -1,7 +1,12 @@
 package br.edu.infinet.seuhospital.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
 
+@Entity
+@Table()
 public class Dentista extends Especialidade{
 	
 	public String turno;
@@ -27,8 +32,7 @@ public class Dentista extends Especialidade{
 	@Override
 	public void impressao() {
 		System.out.println("#ClinicoGeral");
-		System.out.println(this);
-		
+		System.out.println(this);		
 	}
 	
 	

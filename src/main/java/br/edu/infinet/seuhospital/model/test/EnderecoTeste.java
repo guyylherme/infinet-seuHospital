@@ -15,7 +15,7 @@ import br.edu.infinet.seuhospital.model.domain.Endereco;
 import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
 import br.edu.infinet.seuhospital.model.service.EnderecoService;
 
-@Order(2)
+@Order(4)
 @Component
 public class EnderecoTeste implements ApplicationRunner {
 	

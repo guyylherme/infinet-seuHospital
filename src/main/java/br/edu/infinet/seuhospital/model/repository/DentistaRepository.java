@@ -7,12 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.edu.infinet.seuhospital.model.domain.ClinicoGeral;
+import br.edu.infinet.seuhospital.model.domain.Dentista;
 
 @Repository
-public interface ClinicoGeralRepository extends CrudRepository<ClinicoGeral, Integer>{
-	
-	@Query("FROM ClinicoGeral c WHERE c.usuario.id = :idUsuario") 
-	Collection<ClinicoGeral> findAll(@Param("idUsuario") Integer idUsuario);
- 
+public interface DentistaRepository extends CrudRepository<Dentista, Integer>{
+
+	@Query("FROM Dentista d WHERE d.usuario.id = :idUsuario") 
+	Collection<Dentista> findAll(@Param("idUsuario") Integer idUsuario);
+	 
 }
