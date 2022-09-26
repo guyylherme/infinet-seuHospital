@@ -1,3 +1,3 @@
-Ruaa Teste 001;001;Rio de Janeiro;Brasil;25046-111;
-Ruaa Teste 002;002;Rio de Janeiro;Brasil;25046-111;
-Ruaa Teste 003;003;Rio de Janeiro;Brasil;25046-111;
+1;Ruaa Teste 001;001;Rio de Janeiro;Brasil;25046-111;
+2;Ruaa Teste 002;002;Rio de Janeiro;Brasil;25046-111;
+3;Ruaa Teste 003;003;Rio de Janeiro;Brasil;25046-111;

@@ -31,7 +31,7 @@ public class Dentista extends Especialidade{
 	
 	@Override
 	public void impressao() {
-		System.out.println("#ClinicoGeral");
+		System.out.println("#Dentista");
 		System.out.println(this);		
 	}
 	

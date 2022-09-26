@@ -20,15 +20,14 @@ import br.edu.infinet.seuhospital.model.domain.Especialidade;
 import br.edu.infinet.seuhospital.model.domain.Hospital;
 import br.edu.infinet.seuhospital.model.domain.Pediatria;
 import br.edu.infinet.seuhospital.model.domain.Usuario;
-import br.edu.infinet.seuhospital.model.exceptions.EnderecoNuloException;
-import br.edu.infinet.seuhospital.model.exceptions.EspecialidadeNulaVaziaException;
 import br.edu.infinet.seuhospital.model.exceptions.PeriodoInvalidoException;
-import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
 import br.edu.infinet.seuhospital.model.exceptions.ValorHoraZeradoException;
+import br.edu.infinet.seuhospital.model.service.EnderecoService;
 import br.edu.infinet.seuhospital.model.service.EspecialidadeService;
 import br.edu.infinet.seuhospital.model.service.HospitalService;
+import br.edu.infinet.seuhospital.model.service.UsuarioService;
 
-@Order(2)
+@Order(3)
 @Component
 public class HospitalTeste implements ApplicationRunner {
 
@@ -37,14 +36,21 @@ public class HospitalTeste implements ApplicationRunner {
 	
 	@Autowired
 	EspecialidadeService especialidadeService;
+	
+	@Autowired
+	UsuarioService usuarioService;
+	
+	@Autowired
+	EnderecoService enderecoService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#HospitalTeste");
  
-		Usuario usuario = new Usuario();
-		usuario.setId(1);
+		
+		Usuario usuario = usuarioService.findById(1).get();
+		Endereco endereco = enderecoService.findById(1).get();
 		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "especialidades.txt";
@@ -61,19 +67,18 @@ public class HospitalTeste implements ApplicationRunner {
 
 					String[] campos = linha.split(";"); 	
 
-					switch (campos[0].toUpperCase()) {					
+					switch (campos[0].toUpperCase()) {	 
+					
 					case "H":
-						try {
-							especialidades = new HashSet<Especialidade>(); 
-							Endereco endereco = new Endereco(campos[4], Integer.valueOf(campos[5]), campos[6],campos[7], campos[8]);
-							Hospital hospital = new Hospital(campos[1], campos[2], campos[3], endereco, especialidades);							
+						try { 
+							Hospital hospital = new Hospital(campos[1], campos[2], campos[3], endereco, especialidades, usuario);							
 							hospitalService.incluir(hospital);
 
-						} catch (EnderecoNuloException | EspecialidadeNulaVaziaException | RuaNaoPreenchidoException e) {
+						} catch (Exception e) {
 							System.out.println("[ ERROR - HOSPITAL TESTE ] " + e.getMessage());
 						}
 						break;
- 
+						
 					case "D":
 						try { 
 							Dentista dentista = new Dentista();
@@ -148,7 +153,7 @@ public class HospitalTeste implements ApplicationRunner {
 						} 
 						
 						break;
-						
+						 
 					default:
 						break;
 					}

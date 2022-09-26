@@ -33,29 +33,31 @@ public class Endereco implements IPrinter {
 	}
 
 	public void impressao() {
-		System.out.println("#Pedido");
+		System.out.println("#Endereco");
 		System.out.println(this);
 	}
 	
-	public Endereco(String rua, int numero, String estado, String pais, String cep) throws Exception { 
+	public Endereco(Integer id, String rua, int numero, String estado, String pais, String cep, Usuario usuario) throws Exception { 
 		
 		if(rua == null || rua.isEmpty()) {
 			throw new RuaNaoPreenchidoException("Não é possivel aceitar RUA nulo ou vazio."); 
 		} 
 		
+		this.id = id;
 		this.rua = rua;
 		this.numero = numero;
 		this.estado = estado;
 		this.pais = pais;
 		this.cep = cep;
+		this.usuario = usuario;
 	}
 
 
 
 	@Override
 	public String toString() {
-		return "Endereco [rua=" + rua + ", numero=" + numero + ", estado=" + estado + ", pais=" + pais + ", cep=" + cep
-				+ "]";
+		return "Endereco [id=" + id + ", numero=" + numero + ", rua=" + rua + ", estado=" + estado + ", pais=" + pais
+				+ ", cep=" + cep + ", usuario=" + usuario + "]";
 	}
 	
 	

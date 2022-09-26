@@ -19,11 +19,6 @@ public class ClinicoGeralService {
 	public void incluir(ClinicoGeral clinicoGeral) { 
 		
 		try {
-			
-			System.out.println("*********************");
-			System.out.println(clinicoGeral.getUsuario());
-			System.out.println("*********************");
-			
 			clinicoGeralRepository.save(clinicoGeral);			
 			AppImpressao.relatorio("Inclusão do clinico " + clinicoGeral.getNome() , clinicoGeral);
 		} catch (Exception e) {

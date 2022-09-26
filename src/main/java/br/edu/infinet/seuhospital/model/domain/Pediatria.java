@@ -31,7 +31,7 @@ public class Pediatria extends Especialidade {
 
 	@Override
 	public void impressao() {
-		System.out.println("#ClinicoGeral");
+		System.out.println("#Pediatria");
 		System.out.println(this);
 	}
 

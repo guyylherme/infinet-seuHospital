@@ -49,7 +49,11 @@ public abstract class Especialidade implements IPrinter {
 	//	return valorHora;
 	//} 
 	
-	
+	@Override
+	public void impressao() {
+		System.out.println("#Especialidade");
+		System.out.println(this);		
+	}
 	
 	public Integer getId() {
 		return id;

@@ -1,6 +1,7 @@
 package br.edu.infinet.seuhospital.model.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class EnderecoService {
 		
 		try {
 			enderecoRepository.save(endereco); 
-			AppImpressao.relatorio("Inclusão do clinico " + endereco.getRua() , endereco);
+			AppImpressao.relatorio("Inclusão do endereço " + endereco.getRua() , endereco);
 		} catch (Exception e) {
 			System.out.println("[ERROR] " + e.getMessage()); 
 		} 
@@ -35,8 +36,13 @@ public class EnderecoService {
 		return enderecoRepository.obterLista(usuario.getId());
 	}
 	
+	public Optional<Endereco> findById(int id) {
+		return enderecoRepository.findById(id);
+	}
+	
 	public void excluir(Integer id){
 		enderecoRepository.deleteById(id);
-	}
+	} 
+	
 
 }

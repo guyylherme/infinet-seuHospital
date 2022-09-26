@@ -12,21 +12,27 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infinet.seuhospital.model.domain.Endereco;
+import br.edu.infinet.seuhospital.model.domain.Usuario;
 import br.edu.infinet.seuhospital.model.exceptions.RuaNaoPreenchidoException;
 import br.edu.infinet.seuhospital.model.service.EnderecoService;
+import br.edu.infinet.seuhospital.model.service.UsuarioService;
 
-@Order(4)
+@Order(2)
 @Component
 public class EnderecoTeste implements ApplicationRunner {
 	
 	@Autowired
 	EnderecoService enderecoService;
 	
+	@Autowired
+	UsuarioService usuarioService;
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println();
 		System.out.println("#EnderecoTeste");
 		
+		Usuario usuario = usuarioService.findById(1).get();
 		
 		String dir = "C:\\Users\\Guylherme\\OneDrive\\Documentos\\Projetos\\Tecnologia Java - Infinet\\seuhospital\\seuhospital\\src\\main\\db_text\\";
 		String arq = "enderecos.txt";
@@ -43,11 +49,11 @@ public class EnderecoTeste implements ApplicationRunner {
 					String[] campos = linha.split(";");
 
 					try {
-			 			Endereco endereco = new Endereco(campos[0] ,Integer.valueOf(campos[1]), campos[2], campos[3], campos[4]);
+			 			Endereco endereco = new Endereco(Integer.valueOf(campos[0]) ,campos[1] ,Integer.valueOf(campos[2]), campos[3], campos[4], campos[5], usuario);
 			 			enderecoService.incluir(endereco);
 			 			
 					} catch (RuaNaoPreenchidoException e) {
-						System.out.println("[ERROR] " + e.getMessage());
+						System.out.println("[ERROR] - " + e.getMessage());
 					}
 
 					linha = leitura.readLine();

@@ -20,8 +20,7 @@ public class ClinicoGeralController {
 	 
 	
 	@GetMapping(value = "/clinicoGeral/lista")
-	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario usuario) {
-		   
+	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario usuario) {		   
 		model.addAttribute("listagem", clinicoGeralService.obterLista(usuario));		
 		return "clinicoGeral/lista";
 	}
@@ -32,16 +31,14 @@ public class ClinicoGeralController {
 	}
 	
 	@PostMapping(value = "/clinicoGeral/incluir")
-	public String incluir(ClinicoGeral clinicoGeral, @SessionAttribute("user") Usuario usuario){
-		
+	public String incluir(ClinicoGeral clinicoGeral, @SessionAttribute("user") Usuario usuario){		
 		clinicoGeral.setUsuario(usuario);
 		clinicoGeralService.incluir(clinicoGeral);			
 		return "redirect:/clinicoGeral/lista";
 	}
 	
 	@GetMapping(value = "/clinicoGeral/{id}/excluir")
-	public String exclusao(@PathVariable Integer id) {
-		
+	public String exclusao(@PathVariable Integer id) {		
 		clinicoGeralService.excluir(id); 		
 		return "redirect:/clinicoGeral/lista";
 	}

@@ -43,11 +43,11 @@ public class Hospital implements IPrinter {
 	}
 
 	public void impressao() {
-		System.out.println("#Pedido");
+		System.out.println("#Hospital");
 		System.out.println(this);
 	}
 
-	public Hospital(String nome, String cnpj, String descricao, Endereco endereco, Set<Especialidade> especialidades)
+	public Hospital(String nome, String cnpj, String descricao, Endereco endereco, Set<Especialidade> especialidades, Usuario usuario)
 			throws EnderecoNuloException, EspecialidadeNulaVaziaException {
 		if (endereco == null) {
 			throw new EnderecoNuloException("Endereço do Hospital não pode ser nulo.");
@@ -62,12 +62,13 @@ public class Hospital implements IPrinter {
 		this.descricao = descricao;
 		this.endereco = endereco;
 		this.especialidades = especialidades;
+		this.usuario = usuario;
 	}	
 
 	@Override
 	public String toString() {
-		return "Hospital [nome=" + nome + ", cnpj=" + cnpj + ", descricao=" + descricao + ", endereco=" + endereco
-				+ ", totalEspecialidade=" + especialidades.size() + "]";
+		return "Hospital [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", descricao=" + descricao + ", endereco="
+				+ endereco + ", Totalespecialidades=" + especialidades.size() + ", usuario=" + usuario + "]";
 	}
 	
 	
