@@ -29,26 +29,26 @@
 				<div class="row">
 					<div class="col">
 						<label for="rua">Rua:</label>
-						<input type="text" name="rua" class="form-control" placeholder="Insira a rua">
+						<input type="text" name="rua" required="required" class="form-control" placeholder="Insira a rua">
 					</div>
 					<div class="col">
 						<label for="numero">Número:</label>
-						<input type="number" name="numero" class="form-control" placeholder="Insira o número">
+						<input type="number" name="numero" required="required" class="form-control" placeholder="Insira o número">
 					</div>
 				</div>
 				
 				<div class="row mt-2">
 					<div class="col">
 						<label for="estado">Estado:</label>
-						<input type="text" name="estado" class="form-control" placeholder="Insira o estado">
+						<input type="text" name="estado" required="required" class="form-control" placeholder="Insira o estado">
 					</div>
 					<div class="col">
 						<label for="pais">País:</label>
-						<input type="text" name="pais" class="form-control" placeholder="Insira o País">
+						<input type="text" name="pais" required="required" class="form-control" placeholder="Insira o País">
 					</div>
 					<div class="col">
 						<label for="cep">CEP:</label>
-						<input type="text" name="cep" class="form-control" placeholder="Insira o CEP">
+						<input type="text" name="cep" required="required" class="form-control" placeholder="Insira o CEP">
 					</div>
 				</div>
  

@@ -17,11 +17,17 @@ public class PediatriaController {
 	
 	@Autowired
 	PediatriaService pediatriaService; 
+	
+	private String mensagem;
+	private String tipo;
 		  
 	@GetMapping(value = "/pediatra/lista")
 	public String telaPediatria(Model model, @SessionAttribute("user") Usuario usuario) {
 		   
-		model.addAttribute("listagem", pediatriaService.obterLista(usuario));		
+		model.addAttribute("listagem", pediatriaService.obterLista(usuario));	
+		model.addAttribute("mensagem", mensagem);
+		model.addAttribute("tipo", tipo);
+		
 		return "pediatria/lista";
 	}
 	
@@ -35,6 +41,8 @@ public class PediatriaController {
 		
 		pediatra.setUsuario(usuario);
 		pediatriaService.incluir(pediatra);	
+		mensagem = pediatra.getNome() + " incluído com sucesso!"; 
+		tipo = " alert-success";
 		
 		return "redirect:/pediatra/lista";
 	}
@@ -43,7 +51,17 @@ public class PediatriaController {
 	@GetMapping(value = "/pediatra/{id}/excluir")
 	public String exclusao(@PathVariable Integer id) {
 		
-		pediatriaService.excluir(id); 		
+				
+		try {
+			pediatriaService.excluir(id); 	
+			mensagem = "Exclusão da Pediatria <strong>#" + id + "</strong> realizada com sucesso!";
+			tipo = " alert-success";
+			
+		} catch (Exception e) {
+			mensagem = "Impossível realizar a exclusão da Pediatria <strong>#" + id + "</strong>" ; 
+			tipo = " alert-danger";
+		}
+		
 		return "redirect:/pediatra/lista";
 	} 
 }

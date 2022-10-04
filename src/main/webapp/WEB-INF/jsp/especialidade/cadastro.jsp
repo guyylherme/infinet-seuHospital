@@ -11,17 +11,17 @@
 <div class="row">
 	<div class="col">
 		<label for="nome">Nome:</label> <input type="text" name="nome"
-			class="form-control" placeholder="Insira o nome">
+			class="form-control" placeholder="Insira o nome" required="required">
 	</div>
 
 	<div class="col">
 		<label for="codigo">Código:</label> <input type="text" name="codigo"
-			class="form-control" placeholder="Insira o codigo">
+			class="form-control" placeholder="Insira o codigo" required="required">
 	</div>
 
 	<div class="col">
 		<label for="valorHora">Valor p/ hora:</label> <input type="number"
-			name="valorHora" class="form-control"
+			name="valorHora" class="form-control" required="required"
 			placeholder="Insira o valor p/ hora">
 	</div>
 

@@ -25,10 +25,17 @@ public class HospitalController {
 	
 	@Autowired
 	EnderecoService enderecoService;
+	
+	private String mensagem;
+	private String tipo;
 	 
 	@GetMapping(value = "/hospital/lista")
-	public String telaHospital(Model model, @SessionAttribute("user") Usuario usuario) {		   
-		model.addAttribute("listagem", hospitalService.obterLista(usuario));		
+	public String telaHospital(Model model, @SessionAttribute("user") Usuario usuario) {
+		
+		model.addAttribute("listagem", hospitalService.obterLista(usuario));	
+		model.addAttribute("mensagem", mensagem);
+		model.addAttribute("tipo", tipo);
+				
 		return "hospital/lista";
 	}
 		
@@ -41,16 +48,30 @@ public class HospitalController {
 	}
 	
 	@PostMapping(value = "/hospital/incluir")
-	public String incluir(Hospital hospital, @SessionAttribute("user") Usuario usuario){					
+	public String incluir(Hospital hospital, @SessionAttribute("user") Usuario usuario){	
+		
 		hospital.setUsuario(usuario);		
-		hospitalService.incluir(hospital);		
+		hospitalService.incluir(hospital);	
+		mensagem = hospital.getNome() + " incluído com sucesso!"; 
+		tipo = " alert-success";
+		
 		return "redirect:/hospital/lista";
 	}
 	
 	
 	@GetMapping(value = "/hospital/{id}/excluir")
 	public String exclusao(@PathVariable Integer id) {		
-		hospitalService.excluir(id); 		
+						
+		try {
+			hospitalService.excluir(id); 
+			mensagem = "Exclusão do Hospital <strong>#" + id + "</strong> realizado com sucesso!"; 
+			tipo = " alert-success";
+			
+		} catch (Exception e) {
+			mensagem = "Impossível realizar a exclusão do Hospital <strong>#" + id + "</strong>" ; 
+			tipo = " alert-danger";
+		}
+		
 		return "redirect:/hospital/lista";
 	}
 

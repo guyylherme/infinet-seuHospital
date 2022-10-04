@@ -34,11 +34,11 @@
 				<div class="row">
 					<div class="col">
 						<label for="nome">Nome:</label>
-						<input type="text" name="nome" class="form-control" placeholder="Insira o nome">
+						<input type="text" name="nome" class="form-control" required="required" placeholder="Insira o nome">
 					</div>
 					<div class="col">
 						<label for="cnpj">CNPJ:</label>
-						<input type="text" name="cnpj" class="form-control" placeholder="Insira o cnpj">
+						<input type="text" name="cnpj" class="form-control" required="required" placeholder="Insira o cnpj">
 					</div>
 				</div>
 				

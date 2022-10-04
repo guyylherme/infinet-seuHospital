@@ -20,33 +20,39 @@
 
 
 	<div class="container mb-5">
-	
+
 		<h2 class="mt-4">Infinet - Seu Hospital</h2>
- 
+		
 		
 		<div class="container-fluid pt-5 w-100 dentista">
-					 
+
 			<div class="row">
-				<div class="col-6 text-left"><h4>EndereÁos</h4></div>
-				<div class="col-6 text-right"><h4><a href="/endereco/incluir">Novo endereÁo</a></h4></div>
+				<div class="col-6 text-left">
+					<h4>Endere√ßos</h4>
+				</div>
+				<div class="col-6 text-right">
+					<h4>
+						<a href="/endereco/incluir">Novo endere√ßo</a>
+					</h4>
+				</div>
 			</div>
-		
+
 			<table class="table table-hover">
 				<thead>
-					<tr> 
+					<tr>
 						<th scope="col">ID</th>
 						<th scope="col">Rua</th>
 						<th scope="col">Numero</th>
 						<th scope="col">Estado</th>
-						<th scope="col">PaÌs</th>
-						<th scope="col">CEP</th> 
-						<th scope="col">Usu·rio</th> 
-						<th scope="col"></th> 
+						<th scope="col">Pa√≠s</th>
+						<th scope="col">CEP</th>
+						<th scope="col">Usu√°rio</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
-				
+
 				<tbody>
-					
+
 					<c:forEach var="endereco" items="${ listagem }">
 
 						<tr>
@@ -55,8 +61,8 @@
 							<td>${endereco.numero}</td>
 							<td>${endereco.estado}</td>
 							<td>${endereco.pais}</td>
-							<td>${endereco.cep}</td> 
-							<td>${endereco.usuario.nome}</td> 
+							<td>${endereco.cep}</td>
+							<td>${endereco.usuario.nome}</td>
 							<td><a href="/endereco/${endereco.id}/excluir">excluir</a></td>
 						</tr>
 
@@ -65,9 +71,9 @@
 				</tbody>
 			</table>
 		</div>
-		
-		 
-		
+
+
+
 	</div>
 
 
@@ -84,9 +90,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-		
-	<script> 
-		$('.nav-item.endereco').addClass('active'); 
+
+	<script>
+		$('.nav-item.endereco').addClass('active');
 	</script>
 </body>
 </html>

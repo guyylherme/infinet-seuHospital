@@ -17,11 +17,17 @@ public class EspecialidadeController {
 	
 	@Autowired
 	EspecialidadeService especialidadeService;	
+	
+	private String mensagem;
+	private String tipo;
 	 
 	@GetMapping(value = "/especialidade/lista")
 	public String telaEspecialidade(Model model, @SessionAttribute("user") Usuario usuario) {
 		   
-		model.addAttribute("listagem", especialidadeService.obterLista(usuario));		
+		model.addAttribute("listagem", especialidadeService.obterLista(usuario));
+		model.addAttribute("mensagem", mensagem);
+		model.addAttribute("tipo", tipo);
+		
 		return "especialidade/lista";
 	}
 	
@@ -40,8 +46,17 @@ public class EspecialidadeController {
 	
 	@GetMapping(value = "/especialidade/{id}/excluir")
 	public String exclusao(@PathVariable Integer id) {
+				
+		try {
+			especialidadeService.excluir(id); 
+			mensagem = "Exclusão da Especialidade <strong>#" + id + "</strong> realizada com sucesso!";
+			tipo = " alert-success";
+			
+		} catch (Exception e) {
+			mensagem = "Impossível realizar a exclusão da Especialidade <strong>#" + id + "</strong>" ; 
+			tipo = " alert-danger";
+		}
 		
-		especialidadeService.excluir(id); 		
 		return "redirect:/especialidade/lista";
 	} 
 

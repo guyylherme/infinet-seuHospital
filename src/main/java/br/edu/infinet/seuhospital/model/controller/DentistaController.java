@@ -18,10 +18,16 @@ public class DentistaController {
 	@Autowired
 	DentistaService dentistaService; 
 	
+	private String mensagem;
+	private String tipo;
+	
 	@GetMapping(value = "/dentista/lista")
 	public String telaDentista(Model model, @SessionAttribute("user") Usuario usuario) {
 		   
-		model.addAttribute("listagem", dentistaService.obterLista(usuario));		
+		model.addAttribute("listagem", dentistaService.obterLista(usuario));	
+		model.addAttribute("mensagem", mensagem);	
+		model.addAttribute("tipo", tipo);
+		
 		return "dentista/lista";
 	}
 	
@@ -35,6 +41,8 @@ public class DentistaController {
 		
 		dentista.setUsuario(usuario);
 		dentistaService.incluir(dentista);	
+		mensagem = dentista.getNome() + " incluído com sucesso!"; 
+		tipo = " alert-success";
 		
 		return "redirect:/dentista/lista";
 	}
@@ -42,7 +50,17 @@ public class DentistaController {
 	@GetMapping(value = "/dentista/{id}/excluir")
 	public String exclusao(@PathVariable Integer id) {
 		
-		dentistaService.excluir(id); 		
+		try {
+			dentistaService.excluir(id);  
+			mensagem = "Exclusão do Dentista <strong>#" + id + "</strong> realizada com sucesso!"; 
+			tipo = " alert-success";
+			
+		} catch (Exception e) {
+			mensagem = "Impossível realizar a exclusão do Dentista <strong>#" + id + "</strong>" ; 
+			tipo = " alert-danger";
+		}
+		
+				
 		return "redirect:/dentista/lista";
 	} 
 

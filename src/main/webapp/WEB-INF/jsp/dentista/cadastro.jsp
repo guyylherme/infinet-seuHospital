@@ -32,7 +32,7 @@
 				<div class="row mt-2">
 					<div class="col">
 						<label for="turno">Turno:</label>
-						<input type="text" name="turno" class="form-control" placeholder="Insira o turno">
+						<input type="text" name="turno" required="required" class="form-control" placeholder="Insira o turno">
 					</div>
 					
 					<div class="col">

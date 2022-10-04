@@ -18,10 +18,16 @@ public class ClinicoGeralController {
 	@Autowired
 	private ClinicoGeralService clinicoGeralService;	
 	 
+	private String mensagem;
+	private String tipo;
 	
 	@GetMapping(value = "/clinicoGeral/lista")
-	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario usuario) {		   
-		model.addAttribute("listagem", clinicoGeralService.obterLista(usuario));		
+	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario usuario) {
+		
+		model.addAttribute("listagem", clinicoGeralService.obterLista(usuario));	
+		model.addAttribute("mensagem", mensagem);	
+		model.addAttribute("tipo", tipo);
+		
 		return "clinicoGeral/lista";
 	}
 	
@@ -32,14 +38,28 @@ public class ClinicoGeralController {
 	
 	@PostMapping(value = "/clinicoGeral/incluir")
 	public String incluir(ClinicoGeral clinicoGeral, @SessionAttribute("user") Usuario usuario){		
+		
 		clinicoGeral.setUsuario(usuario);
-		clinicoGeralService.incluir(clinicoGeral);			
+		clinicoGeralService.incluir(clinicoGeral);
+		mensagem = clinicoGeral.getNome() + " incluído com sucesso!"; 
+		tipo = " alert-success";
+		
 		return "redirect:/clinicoGeral/lista";
 	}
 	
 	@GetMapping(value = "/clinicoGeral/{id}/excluir")
 	public String exclusao(@PathVariable Integer id) {		
-		clinicoGeralService.excluir(id); 		
+					
+		try {
+			clinicoGeralService.excluir(id); 
+			mensagem = "Exclusão do Clinico Geral <strong>#" + id + "</strong> realizada com sucesso!"; 
+			tipo = " alert-success";
+			
+		} catch (Exception e) {
+			mensagem = "Impossível realizar a exclusão do Clinico Geral <strong>#" + id + "</strong>"; 
+			tipo = " alert-danger";
+		}
+		
 		return "redirect:/clinicoGeral/lista";
 	}
 

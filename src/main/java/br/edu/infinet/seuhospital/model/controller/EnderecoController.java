@@ -17,11 +17,17 @@ public class EnderecoController {
 	
 	@Autowired
 	private EnderecoService enderecoService;
+	
+	private String mensagem;
+	private String tipo;
 	 
 	@GetMapping(value = "/endereco/lista")
-	public String telaClinicoGeral(Model model, @SessionAttribute("user") Usuario usuario) {
+	public String telaEndereco(Model model, @SessionAttribute("user") Usuario usuario) {
 		 
-		model.addAttribute("listagem", enderecoService.obterLista(usuario));		
+		model.addAttribute("listagem", enderecoService.obterLista(usuario));	
+		model.addAttribute("mensagem", mensagem);	
+		model.addAttribute("tipo", tipo);
+		
 		return "endereco/lista";
 	}
 	
@@ -35,6 +41,8 @@ public class EnderecoController {
 		
 		endereco.setUsuario(usuario);
 		enderecoService.incluir(endereco);	
+		mensagem = endereco.getRua() + " " + endereco.getEstado() + " incluído com sucesso!"; 
+		tipo = " alert-success";
 		
 		return "redirect:/endereco/lista";
 	}
@@ -42,7 +50,16 @@ public class EnderecoController {
 	@GetMapping(value = "/endereco/{id}/excluir")
 	public String exclusao(@PathVariable Integer id) {
 		
-		enderecoService.excluir(id); 		
+		try {
+			enderecoService.excluir(id); 
+			mensagem = "Exclusão do endereço <strong>#" + id + "</strong> realizada com sucesso!"; 
+			tipo = " alert-success";
+			
+		} catch (Exception e) {
+			mensagem = "Impossível realizar a exclusão do Endereço  <strong>#" + id + "</strong>"; 
+			tipo = " alert-danger";
+		}
+				
 		return "redirect:/endereco/lista";
 	}
 	
